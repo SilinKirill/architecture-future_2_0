@@ -1,0 +1,19 @@
+# Terraform downloads, state, plans and local credentials
+**/.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.tfstate.lock.info
+*.tfplan
+crash*.log
+*.auto.tfvars
+*.auto.tfvars.json
+*.local.tfvars
+*.local.hcl
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+sa-key*.json
+authorized_key*.json
+**/.local/

@@ -1,0 +1,21 @@
+x-terraform: &terraform
+  image: hashicorp/terraform:1.11.4
+  working_dir: /workspace
+  volumes:
+    - .:/workspace
+  environment: &terraform-environment
+    TF_IN_AUTOMATION: "1"
+    TF_CLI_CONFIG_FILE: /workspace/terraform.rc
+
+services:
+  terraform:
+    <<: *terraform
+    environment:
+      <<: *terraform-environment
+      YC_TOKEN:
+      YC_CLOUD_ID:
+      YC_FOLDER_ID:
+
+  check:
+    <<: *terraform
+    entrypoint: ["/bin/sh", "/workspace/scripts/check.sh"]
