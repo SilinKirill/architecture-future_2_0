@@ -1,0 +1,103 @@
+digraph Operational {
+  graph [charset="UTF-8", rankdir=TB, bgcolor="#F8FAFC", pad=0.3,
+    nodesep=0.26, ranksep=0.59, splines=polyline, newrank=true,
+    fontname="Arial", fontsize=23, fontcolor="#10253F", labelloc=t,
+    label=<<B>C4 · Контейнеры · Целевая архитектура через 36 месяцев</B><BR/><FONT POINT-SIZE="14">Операционные домены и публикация данных для аналитики</FONT>>];
+  node [shape=box, style="rounded,filled", margin="0.14,0.10", fontname="Arial", fontsize=10,
+    color="#93B3D3", fillcolor="#E7F1FB", fontcolor="#10253F", penwidth=1.2];
+  edge [fontname="Arial", fontsize=8, fontcolor="#344F67", color="#52718B", arrowsize=0.62];
+
+  medic [label=<<B>Врачи и регистратура</B><BR/><FONT POINT-SIZE="8">Роль</FONT>>, fillcolor="#F1F5F9", color="#94A3B8"];
+  ai_user [label=<<B>Команды ИИ</B><BR/><FONT POINT-SIZE="8">Роль</FONT>>, fillcolor="#F1F5F9", color="#94A3B8"];
+  bank_user [label=<<B>Банковские каналы</B><BR/><FONT POINT-SIZE="8">Входы банковского контура</FONT>>, fillcolor="#F1F5F9", color="#94A3B8"];
+  pharmacy [label=<<B>Фармкомпания</B><BR/><FONT POINT-SIZE="8">Внешняя система · API</FONT>>, fillcolor="#F1F5F9", color="#94A3B8"];
+  electronics [label=<<B>Производитель медоборудования</B><BR/><FONT POINT-SIZE="8">Внешняя система · API</FONT>>, fillcolor="#F1F5F9", color="#94A3B8"];
+  { rank=same; medic; ai_user; bank_user; pharmacy; electronics; }
+
+  subgraph cluster_platform {
+    label=<<B>ИТ-ландшафт компании</B>>;
+    fontname="Arial"; fontsize=12; fontcolor="#173B64"; labeljust=l;
+    style="rounded,filled"; color="#91ABBE"; fillcolor="#FFFFFF"; margin=19;
+
+    subgraph cluster_clinic {
+      label=<<B>Клиники</B>>; style="rounded,filled"; color="#CFDEEA"; fillcolor="#F4F8FC"; margin=13;
+      clinic [label=<<B>Новый сервис клиники</B><BR/><FONT POINT-SIZE="8">Контейнер · API/приложение</FONT><BR/>Записи, визиты и выставление счетов>];
+      clinic_db [label=<<B>БД операций клиники</B><BR/><FONT POINT-SIZE="8">Хранилище · OLTP БД</FONT><BR/>Операции и таблица outbox>];
+      ehr [label=<<B>Медицинские карты</B><BR/><FONT POINT-SIZE="8">Ограниченное хранилище · EHR</FONT><BR/>Истории, записи и документы>, color="#B78760", fillcolor="#FCEEDC", fontcolor="#713C16"];
+      clinic -> clinic_db [label="Счёт + outbox\nодна транзакция"];
+      clinic -> ehr [label="Карты и истории\nзащищённый API"];
+      { rank=same; clinic_db; ehr; }
+    }
+
+    subgraph cluster_ai {
+      label=<<B>ИИ-направление</B>>; style="rounded,filled"; color="#CFDEEA"; fillcolor="#F4F8FC"; margin=13;
+      clinical_ai [label=<<B>Медицинский ИИ</B><BR/><FONT POINT-SIZE="8">Ограниченный контур · inference API</FONT><BR/>Обработка исследований>, color="#B78760", fillcolor="#FCEEDC", fontcolor="#713C16"];
+      ai [label=<<B>Операционный сервис ИИ</B><BR/><FONT POINT-SIZE="8">Контейнер · API/приложение</FONT><BR/>Запуски, статусы, SLA>];
+      models [label=<<B>Модели и результаты</B><BR/><FONT POINT-SIZE="8">Ограниченное хранилище</FONT><BR/>Артефакты и содержимое результатов>, color="#B78760", fillcolor="#FCEEDC", fontcolor="#713C16"];
+      ai_db [label=<<B>БД операций ИИ</B><BR/><FONT POINT-SIZE="8">Хранилище · OLTP БД</FONT><BR/>Запуски и таблица outbox>];
+      clinical_ai -> models [label="Артефакты и результаты\nзащищённый API"];
+      ai -> clinical_ai [label="Запуск и статус\nзакрытый API", constraint=false];
+      ai -> ai_db [label="Статус запуска + outbox\nодна транзакция"];
+      { rank=same; models; ai_db; }
+    }
+
+    subgraph cluster_bank {
+      label=<<B>Банк</B>>; style="rounded,filled"; color="#CFDEEA"; fillcolor="#F4F8FC"; margin=13;
+      bank [label=<<B>Банковское ядро</B><BR/><FONT POINT-SIZE="8">Контейнер · Core Banking API</FONT><BR/>Счета и платежи>];
+      bank_db [label=<<B>БД банковского домена</B><BR/><FONT POINT-SIZE="8">Хранилище · OLTP БД</FONT><BR/>Операции и таблица outbox>];
+      bank -> bank_db [label="Операция + outbox\nодна транзакция"];
+    }
+
+    subgraph cluster_partners {
+      label=<<B>Интеграции с партнёрами</B>>; labeljust=c;
+      style="rounded,filled"; color="#CFDEEA"; fillcolor="#F4F8FC"; margin=13;
+      pharma [label=<<B>Адаптер фармкомпании</B><BR/><FONT POINT-SIZE="8">Контейнер · интеграционный API</FONT><BR/>Контракт о поставках по партиям>];
+      retail [label=<<B>Адаптер медоборудования</B><BR/><FONT POINT-SIZE="8">Контейнер · интеграционный API</FONT><BR/>Контракт о состоянии устройств>];
+      pharma_db [label=<<B>БД поставок фармы</B><BR/><FONT POINT-SIZE="8">Хранилище · OLTP БД</FONT><BR/>Поставки и таблица outbox>];
+      retail_db [label=<<B>БД эксплуатации устройств</B><BR/><FONT POINT-SIZE="8">Хранилище · OLTP БД</FONT><BR/>Состояние и таблица outbox>];
+      pharma -> pharma_db [label="Поставка + outbox\nодна транзакция"];
+      retail -> retail_db [label="Состояние + outbox\nодна транзакция"];
+      { rank=same; pharma; retail; }
+      { rank=same; pharma_db; retail_db; }
+    }
+
+    subgraph cluster_stream {
+      label=<<B>Региональная публикация данных</B>>; labeljust=r;
+      style="rounded,filled"; color="#A9C8BF"; fillcolor="#F1F8F6"; margin=16;
+      cdc [label=<<B>Публикатор доменных событий</B><BR/><FONT POINT-SIZE="8">Контейнер · CDC / Kafka Connect</FONT><BR/>Читает таблицы outbox<BR/>Проверяет поля перед публикацией>, fillcolor="#DEF1EB", color="#6E9E91"];
+      kafka [id="kafka", URL="c4-l2-analytics.svg#kafka", tooltip="Открыть вид аналитической платформы",
+        label=<<B>Шина событий</B><BR/><FONT POINT-SIZE="8">Контейнер · Apache Kafka</FONT><BR/>Темы по домену и региону · ACL>, fillcolor="#DEF1EB", color="#6E9E91"];
+      schema [id="schema", label=<<B>Реестр схем</B><BR/><FONT POINT-SIZE="8">Контейнер · Schema Registry</FONT><BR/>Разрешённые схемы и версии>, fillcolor="#DEF1EB", color="#6E9E91"];
+      projector [id="projector", URL="c4-l3-domain-stream-projector.svg", tooltip="Открыть компоненты проектора",
+        label=<<B>Проектор доменного потока</B><BR/><FONT POINT-SIZE="8">Контейнер · Apache Flink</FONT><BR/>Формирует доменные продукты →>, fillcolor="#CBE9DF", color="#448471", penwidth=1.6];
+      { rank=same; cdc; kafka; projector; schema; }
+      cdc -> kafka [label="Разрешённые поля\nсобытий · Kafka"];
+      kafka -> projector [label="Доменные темы\nKafka consumer"];
+      projector -> schema [label="Проверка версии\nREST / schema ID", style=dashed, color="#697E94"];
+    }
+
+    { rank=same; clinic; clinical_ai; ai; bank; pharma; retail; }
+    { rank=same; clinic_db; ehr; models; ai_db; bank_db; pharma_db; retail_db; }
+
+    clinical_ai:sw -> ehr:ne [label="Данные исследования\nзакрытый mTLS API", dir=back, color="#A2683C", fontcolor="#713C16"];
+
+    clinic_db -> cdc [label="outbox"];
+    ai_db -> cdc [label="outbox"];
+    bank_db -> cdc [label="outbox"];
+    pharma_db -> cdc [label="outbox"];
+    retail_db -> cdc [label="outbox"];
+  }
+
+  medic -> clinic [label="Запись и приём · HTTPS"];
+  ai_user -> ai [label="Запуск и мониторинг · HTTPS"];
+  bank_user -> bank [label="Платёжные операции · API"];
+  pharmacy -> pharma [label="Партии и поставки · mTLS API"];
+  electronics -> retail [label="Устройства и площадки · mTLS API"];
+
+  note [shape=note, fillcolor="#FFF7ED", color="#C89264", fontcolor="#713C16",
+    label="Медкарты, истории и содержимое результатов ИИ\nостаются в ограниченных хранилищах"];
+  legacy [shape=note, label="Мосты legacy · только на период миграции\nК 36-му месяцу выведены из критического пути", fillcolor="#F1F5F9", color="#94A3B8"];
+  { rank=same; note; legacy; }
+  kafka -> note [style=invis];
+  projector -> legacy [style=invis];
+}

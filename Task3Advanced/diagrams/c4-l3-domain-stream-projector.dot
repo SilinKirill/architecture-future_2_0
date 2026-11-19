@@ -1,0 +1,50 @@
+digraph DomainStreamProjector {
+  graph [charset="UTF-8", rankdir=TB, bgcolor="#F8FAFC", pad=0.3,
+    nodesep=0.49, ranksep=0.63, splines=polyline, newrank=true,
+    fontname="Arial", fontsize=23, fontcolor="#10253F", labelloc=t,
+    label=<<B>C4 · Компоненты · Проектор доменного потока</B><BR/><FONT POINT-SIZE="14">Пример потока «Оплаты счетов» на Apache Flink</FONT>>];
+  node [shape=box, style="rounded,filled", margin="0.17,0.12", fontname="Arial", fontsize=11,
+    color="#88A8C8", fillcolor="#E7F1FB", fontcolor="#10253F", penwidth=1.2];
+  edge [fontname="Arial", fontsize=9, fontcolor="#344F67", color="#52718B", arrowsize=0.65];
+
+  kafka [id="kafka", URL="c4-l2-analytics.svg#kafka", tooltip="Открыть вид аналитической платформы",
+    label=<<B>Шина событий</B><BR/><FONT POINT-SIZE="8">Внешний контейнер · Apache Kafka</FONT><BR/>Темы выставления счетов и проводок<BR/>Разрешённый регион>, fillcolor="#EDF6F3", color="#87AFA3"];
+  schema [label=<<B>Реестр схем</B><BR/><FONT POINT-SIZE="8">Внешний контейнер · Schema Registry</FONT><BR/>Версии схем и разрешённые поля>, fillcolor="#EDF6F3", color="#87AFA3"];
+  { rank=same; kafka; schema; }
+
+  subgraph cluster_projector {
+    label=<<B>Проектор доменного потока</B> · Flink>;
+    fontname="Arial"; fontsize=12; fontcolor="#173B64"; labeljust=l;
+    style="rounded,filled"; color="#91ABBE"; fillcolor="#FFFFFF"; margin=20;
+
+    validator [label=<<B>Валидатор разрешённой схемы</B><BR/><FONT POINT-SIZE="8">Компонент · Flink operator</FONT><BR/>Проверяет схему, регион, версию и поля>];
+    projection [label=<<B>Идемпотентный проектор</B><BR/><FONT POINT-SIZE="8">Компонент · Flink keyed state</FONT><BR/>Дедупликация по домену, региону и event_id<BR/>Версия платежа, расчёт суммы за вычетом возвратов>];
+    writer [label=<<B>Запись доменной витрины</B><BR/><FONT POINT-SIZE="8">Компонент · Iceberg sink</FONT><BR/>Фиксирует обновления по контрольной точке<BR/>При повторе использует ключ и версию записи>, fillcolor="#DEF1EB", color="#6E9E91"];
+    checkpoint [label=<<B>Контрольные точки</B><BR/><FONT POINT-SIZE="8">Компонент · Flink Checkpoint Coordinator</FONT><BR/>Сохраняет позиции Kafka и состояние операторов<BR/>Восстанавливает обработку с подтверждённой позиции>];
+    quarantine [label=<<B>Карантин сообщения</B><BR/><FONT POINT-SIZE="8">Компонент · Flink side output</FONT><BR/>Отбирает код ошибки, схему и безопасный ID>, fillcolor="#FCEEDC", color="#B78760", fontcolor="#713C16"];
+
+    { rank=same; projection; quarantine; }
+    { rank=same; writer; checkpoint; }
+    validator -> projection [label="Валидный счёт, платёж или возврат"];
+    projection -> writer [label="Изменения по ключу и версии"];
+    validator -> quarantine [label="Ошибка схемы, региона или полей", color="#A2683C", fontcolor="#713C16"];
+    checkpoint -> projection [label="Снимок состояния / восстановление", style=dashed, color="#697E94", constraint=false];
+    writer -> checkpoint [label="ID завершённой\nконтрольной точки", dir=back, style=dashed, color="#697E94"];
+    projection -> checkpoint [style=invis];
+  }
+
+  snapshots [label=<<B>Хранилище контрольных точек</B><BR/><FONT POINT-SIZE="8">Внешнее хранилище · S3</FONT><BR/>Ограниченный доступ сервисной роли Flink>, fillcolor="#EDF6F3", color="#87AFA3"];
+  iceberg [label=<<B>Продукт «Оплаты счетов»</B><BR/><FONT POINT-SIZE="8">Внешнее хранилище · Iceberg / S3</FONT><BR/>День, регион, организация, валюта>, fillcolor="#DEF1EB", color="#6E9E91"];
+  dlq [label=<<B>Очередь диагностики · DLQ</B><BR/><FONT POINT-SIZE="8">Внешний контейнер · Kafka с отдельным ACL</FONT><BR/>Код ошибки и технические метаданные>, fillcolor="#FCEEDC", color="#B78760", fontcolor="#713C16"];
+  { rank=same; iceberg; snapshots; dlq; }
+
+  kafka -> validator [label="Чтение доменных событий · Kafka consumer"];
+  schema -> validator [label="Запрос версии схемы · REST", dir=back, arrowtail=normal, arrowhead=none, style=dashed, color="#697E94"];
+  checkpoint -> snapshots [label="Позиции и состояние\nзапись/чтение · S3 API", style=dashed, color="#697E94"];
+  writer -> iceberg [label="Атомарный commit снапшота\nIceberg / Nessie / S3"];
+  quarantine -> dlq [label="Диагностика без тела события · Kafka", color="#A2683C", fontcolor="#713C16"];
+
+  incident [shape=note, fillcolor="#FFF7ED", color="#C89264", fontcolor="#713C16",
+    label="Владелец разбирает исходное сообщение\nв разрешённом контуре и после исправления\nпубликует факт по контракту."];
+  dlq -> incident [style=invis];
+}
