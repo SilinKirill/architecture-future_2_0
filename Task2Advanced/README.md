@@ -1,76 +1,74 @@
 # Task2Advanced. Удалённый state и CI/CD
 
-Корневая конфигурация [`terraform`](terraform) подключает [модуль ВМ первого задания](../Task1Advanced/modules/vm) и использует его профили `dev`, `stage`, `prod`. Имена ВМ в этом задании — `task2-dev`, `task2-stage` и `task2-prod`. Terraform 1.11.4 хранит состояние в Yandex Object Storage. Ключи имеют вид `task2advanced/<окружение>/terraform.tfstate`. Во время записи S3-бэкенд создаёт временный объект `.tflock` рядом со state. [Документация бэкенда S3](https://developer.hashicorp.com/terraform/language/backend/s3), [настройка Object Storage](https://yandex.cloud/ru/docs/tutorials/infrastructure-management/terraform-state-storage)
+Конфигурация в `terraform` подключает [модуль ВМ Task1](../Task1Advanced/modules/vm) и использует его профили `dev`, `stage` и `prod`. Состояние хранится в приватном бакете Yandex Object Storage по ключу `task2advanced/<окружение>/terraform.tfstate`. Для конкурентных операций Terraform использует объект `.tflock` рядом с состоянием. [S3-бэкенд Terraform](https://developer.hashicorp.com/terraform/language/backend/s3) · [Object Storage для Terraform](https://yandex.cloud/ru/docs/tutorials/infrastructure-management/terraform-state-storage)
 
-После открытия pull request GitHub Actions проверяет формат и конфигурацию Terraform и запускает [проверку S3-бэкенда на MinIO](local-check.md) без облачных учётных данных. Изменения в Yandex Cloud выполняет ручной запуск [Task 2 Terraform](../.github/workflows/task2-terraform.yml) с одобрением сохранённого плана.
+## Как проверить без облака
 
-## Подготовка Yandex Cloud
+Из папки `Task2Advanced` выполните `docker compose run --rm -T check`. Проверка в MinIO должна закончиться строкой `PASS`. Она подтверждает, что два клиента читают одно состояние и конкурентный запуск получает ошибку блокировки. По завершении удалите локальный стенд командой `docker compose down -v`. [Подробности теста](local-check.md)
 
-1. Начните с `dev`. Выберите каталог с активным биллингом и существующую подсеть. Сохраните ID облака, каталога, подсети и зону подсети. Для `stage` и `prod` повторите настройку в отдельных каталогах со своими подсетями. [Создание подсети VPC](https://yandex.cloud/ru/docs/vpc/operations/subnet-create)
-2. Создайте отдельный приватный бакет для каждого окружения. Включите версионирование и оставьте публичный доступ закрытым для чтения объектов, списка объектов и настроек. Оставьте блокировку версий объектов выключенной, чтобы Terraform мог удалять временный `.tflock`. Для хранения планов настройте правило жизненного цикла с префиксом `task2advanced/<окружение>/plans/` на удаление текущих и предыдущих версий через 1 день. Для дополнительной защиты бакета можно включить шифрование ключом KMS и выдать доступ к ключу нужным аккаунтам. [Настройка версионирования](https://yandex.cloud/ru/docs/storage/operations/buckets/versioning), [правила жизненного цикла](https://yandex.cloud/ru/docs/storage/operations/buckets/lifecycles), [шифрование бакета](https://yandex.cloud/ru/docs/storage/operations/buckets/encrypt)
-3. Для каждого окружения создайте три сервисных аккаунта.
-   - Для Object Storage выдайте `storage.editor` на соответствующий бакет и создайте статический ключ доступа. Terraform использует его для чтения state и для создания и удаления файла блокировки. Эту же пару ключей используют задания `plan` и `apply` для передачи плана в приватном бакете.
-   - Для `plan` выдайте `compute.viewer` на каталог окружения и создайте авторизованный ключ JSON.
-   - Для `apply` выдайте `compute.editor` на каталог окружения и создайте отдельный авторизованный ключ JSON. У обоих аккаунтов Compute Cloud должна быть возможность читать используемую подсеть. Если подсеть размещена в отдельном каталоге, предоставьте доступ там. [Роли Compute Cloud](https://yandex.cloud/ru/docs/compute/security/), [роли Object Storage](https://yandex.cloud/ru/docs/storage/security/), [статический ключ](https://yandex.cloud/ru/docs/iam/operations/authentication/manage-access-keys), [авторизованный ключ](https://yandex.cloud/ru/docs/iam/operations/authentication/manage-authorized-keys)
+На pull request [workflow Task 2 Terraform](../.github/workflows/task2-terraform.yml) запускает тесты модуля Task1, проверку формата Terraform и тест с MinIO. Облачное задание запускается вручную.
 
-## Настройка GitHub
+## Подготовка Yandex Cloud для dev
 
-В **Settings → Environments** создайте `dev-plan` и `dev-apply`. Для обоих ограничьте **Deployment branches and tags** именем защищённой ветки по умолчанию. В `dev-apply` включите **Required reviewers**, укажите проверяющего и снимите **Allow administrators to bypass configured protection rules**. Если проверяющих несколько, можно включить **Prevent self-review**. Заполняйте данные только в **Environment secrets** и **Environment variables**. Для `stage` и `prod` настройте собственные пары окружений с их аккаунтами, каталогами и бакетами. Доступность Required reviewers зависит от видимости репозитория и тарифа GitHub. [Настройка окружений GitHub Actions](https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments)
-
-Добавьте в оба окружения одно и то же значение переменной `TF_STATE_BUCKET` и два секрета с ключом Object Storage, `AWS_ACCESS_KEY_ID` и `AWS_SECRET_ACCESS_KEY`. Секрет `YC_SA_KEY_JSON` в `dev-plan` содержит JSON ключа аккаунта для чтения, а в `dev-apply` — JSON ключа аккаунта для изменений. Храните скачанные ключи вне рабочей копии Git.
-
-В окружение `dev-plan` добавьте переменные `YC_CLOUD_ID`, `YC_FOLDER_ID`, `YC_SUBNET_ID`, `YC_ZONE` и `SSH_PUBLIC_KEY`. Значение `SSH_PUBLIC_KEY` — одна строка из файла `.pub`. Переменная `YC_BOOT_IMAGE_ID` позволяет зафиксировать конкретный образ Ubuntu. По умолчанию модуль выбирает актуальный образ семейства `ubuntu-2404-lts`.
-
-## Запуск и проверка в GitHub Actions
-
-1. Когда файл workflow окажется в ветке по умолчанию, откройте **Actions → Task 2 Terraform → Run workflow** и выберите эту ветку. Запуск с `environment=dev`, `operation=deploy` и выключенным `apply` строит план. При пустом state в Summary ожидаются две операции `create`, по одной для ВМ и диска данных. Системный диск создаётся в составе ВМ. До слияния выполните ручную проверку ниже. [Ручной запуск workflow в GitHub](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow)
-2. Запустите тот же сценарий с включённым `apply`. В Summary появятся адреса ресурсов, действия, путь к точному плану в приватном бакете и его SHA-256. Для детальной проверки скачайте этот объект через консоль Yandex Cloud под своей учётной записью с `storage.viewer`, положите его в `terraform/review.tfplan` и из `Task2Advanced` выполните следующее.
-
-   ```sh
-   docker compose run --rm terraform init -backend=false -input=false -lockfile=readonly
-   docker compose run --rm terraform show review.tfplan
-   ```
-
-3. Проверьте коммит и изменения, затем нажмите **Review deployments → Approve and deploy**. Задание `apply` заново инициализирует бэкенд, сверяет хеш и применяет именно этот план. Бинарный план доступен только в бакете. Проверьте в Compute Cloud ВМ `task2-dev` и оба её диска, а в Object Storage — объект `task2advanced/dev/terraform.tfstate`. Чтобы проверить повторный запуск, запустите `deploy` с выключенным `apply`. При неизменных конфигурации, инфраструктуре и образе план не содержит изменений ресурсов.
-4. Для очистки выберите тот же `environment`, `operation=destroy` и включите `apply`. Проверьте ожидаемые удаления в плане и одобрите их. После успешного применения Summary сообщает, что state пуст, и в Compute Cloud отсутствуют созданные ВМ и диски. Бакет с историей состояния нужен для последующих запусков.
-
-Для одного окружения одновременно выполняется один запуск workflow. У каждого запуска свой ключ плана. После изменения state Terraform отклонит старый план. План также отклоняется по истечении двух часов или при повторном запуске только задания `apply`. При отказе создайте новый запуск целиком и проверьте свежий план. Во время ожидания одобрения избегайте ручных изменений инфраструктуры.
+1. Используйте каталог и подсеть, проверенные в [Task1](../Task1Advanced/README.md#ручная-проверка-dev-в-yandex-cloud). К этому моменту завершите удаление тестовой ВМ Task1 и её дисков.
+2. В консоли облака откройте **Object Storage → Бакеты → Создать бакет**. Выберите уникальное имя, оставьте публичный доступ закрытым и включите версионирование. Блокировку версий объектов оставьте выключенной, чтобы Terraform мог удалять временный `.tflock`. [Создание бакета](https://yandex.cloud/ru/docs/storage/operations/buckets/create) · [Версионирование](https://yandex.cloud/ru/docs/storage/operations/buckets/versioning)
+3. Создайте сервисный аккаунт для среды `dev` и назначьте ему `storage.editor` на этот бакет. Выпустите статический ключ доступа. Для ручной проверки этим ключом Terraform работает с бакетом, а IAM-токен пользователя из Task1 даёт доступ к Compute Cloud. [Права на бакет](https://yandex.cloud/ru/docs/storage/security/) · [Статический ключ](https://yandex.cloud/ru/docs/iam/operations/authentication/manage-access-keys)
 
 ## Ручная проверка в Yandex Cloud до слияния
 
-Войдите через Yandex Cloud CLI и выберите профиль нужного облака и каталога. Проверьте, что у вашего пользователя есть права на создание ВМ и дисков. Подготовьте приватный бакет и статический ключ, как описано выше. Из `Task2Advanced` задайте переменные для PowerShell. Вводите значения статического ключа через скрытый ввод, чтобы они не попали в историю команд. [Авторизация провайдера Terraform](https://yandex.cloud/ru/docs/terraform/authentication)
+Из `Task2Advanced` в PowerShell укажите имя бакета, ID и зону подсети из Task1. Если ключ SSH создан с другим именем, укажите путь к соответствующему файлу `.pub`. [Авторизация провайдера Terraform](https://yandex.cloud/ru/docs/terraform/authentication)
 
 ```powershell
 $env:YC_TOKEN = yc iam create-token
 $env:TF_VAR_cloud_id = yc config get cloud-id
 $env:TF_VAR_folder_id = yc config get folder-id
 $env:TF_VAR_subnet_id = '<ID подсети>'
-$env:TF_VAR_zone = '<зона подсети>'
 $env:TF_VAR_ssh_public_key = (Get-Content -Raw "$env:USERPROFILE/.ssh/id_ed25519.pub").Trim()
+$zone = '<зона подсети>'
+$bucket = '<имя бакета dev>'
 $env:AWS_ACCESS_KEY_ID = Read-Host 'ID статического ключа'
 $env:AWS_SECRET_ACCESS_KEY = [System.Net.NetworkCredential]::new('', (Read-Host 'Секретная часть ключа' -AsSecureString)).Password
-$bucket = '<имя бакета dev>'
 ```
 
-Из того же каталога инициализируйте рабочую копию с ключом `dev`. Terraform запускается в Linux-контейнере с зеркалом провайдера из первого задания.
+1. Инициализируйте S3-бэкенд и изучите план. При пустом состоянии ожидаются два создаваемых ресурса. Системный диск входит в ресурс ВМ.
 
-```powershell
-docker compose run --rm terraform init -input=false -lockfile=readonly -reconfigure "-backend-config=bucket=$bucket" "-backend-config=key=task2advanced/dev/terraform.tfstate"
-docker compose run --rm terraform plan -input=false -lock-timeout=2m -var-file=../../Task1Advanced/envs/dev/terraform.tfvars -var=name=task2-dev "-var=zone=$env:TF_VAR_zone" -out=dev.tfplan
-docker compose run --rm terraform show dev.tfplan
-# После проверки плана
-docker compose run --rm terraform apply -input=false -lock-timeout=2m dev.tfplan
-docker compose run --rm terraform output vm
-```
+   ```powershell
+   docker compose run --rm terraform init -input=false -lockfile=readonly -reconfigure "-backend-config=bucket=$bucket" "-backend-config=key=task2advanced/dev/terraform.tfstate"
+   docker compose run --rm terraform plan -input=false -lock-timeout=2m -var-file=../../Task1Advanced/envs/dev/terraform.tfvars -var=name=task2-dev "-var=zone=$zone" -out=dev.tfplan
+   docker compose run --rm terraform show dev.tfplan
+   ```
 
-Проверьте ВМ, её диски и state по тем же признакам, что и для GitHub Actions. После проверки создайте и изучите план удаления, затем примените его. Команда `state list` должна вывести пустой список.
+2. После проверки примените план. В Compute Cloud найдите ВМ `task2-dev` и оба диска, а в Object Storage — объект `task2advanced/dev/terraform.tfstate`.
 
-```powershell
-docker compose run --rm terraform plan -destroy -input=false -lock-timeout=2m -var-file=../../Task1Advanced/envs/dev/terraform.tfvars -var=name=task2-dev "-var=zone=$env:TF_VAR_zone" -out=dev-destroy.tfplan
-docker compose run --rm terraform show dev-destroy.tfplan
-# После проверки плана
-docker compose run --rm terraform apply -input=false -lock-timeout=2m dev-destroy.tfplan
-docker compose run --rm terraform state list
-```
+   ```powershell
+   docker compose run --rm terraform apply -input=false -lock-timeout=2m dev.tfplan
+   docker compose run --rm terraform output vm
+   ```
 
-Удалите локальные `.tfplan` после проверки и очистите переменные с ключами. Для локального теста без биллинга и аккаунта Yandex Cloud используйте [сценарий с MinIO](local-check.md).
+3. Запустите новый контейнер и проверьте, что он видит в S3 ресурсы прошлого запуска. При неизменной инфраструктуре и образе повторный план завершается сообщением `No changes`.
+
+   ```powershell
+   docker compose run --rm terraform state list
+   docker compose run --rm terraform plan -input=false -lock-timeout=2m -var-file=../../Task1Advanced/envs/dev/terraform.tfvars -var=name=task2-dev "-var=zone=$zone"
+   ```
+
+4. Постройте и отдельно подтвердите план удаления. Проверьте пустой `state list` и отсутствие ВМ и её дисков в Compute Cloud.
+
+   ```powershell
+   docker compose run --rm terraform plan -destroy -input=false -lock-timeout=2m -var-file=../../Task1Advanced/envs/dev/terraform.tfvars -var=name=task2-dev "-var=zone=$zone" -out=dev-destroy.tfplan
+   docker compose run --rm terraform show dev-destroy.tfplan
+   # После проверки плана
+   docker compose run --rm terraform apply -input=false -lock-timeout=2m dev-destroy.tfplan
+   docker compose run --rm terraform state list
+   ```
+
+Состояние с пустым списком ресурсов и его история остаются в бакете. Если бакет создан только для одноразовой проверки и CI запускать не планируется, его можно удалить вместе с версиями объекта. После работы удалите локальные файлы `.tfplan` и закройте сессию PowerShell с ключами.
+
+## Настройка и запуск GitHub Actions
+
+1. Для CI задайте тому же сервисному аккаунту `compute.editor` на каталог среды и создайте его авторизованный ключ JSON. Статический ключ S3 из подготовки бакета используется отдельно. [Роли Compute Cloud](https://yandex.cloud/ru/docs/compute/security/) · [Авторизованный ключ](https://yandex.cloud/ru/docs/iam/operations/authentication/manage-authorized-keys)
+2. В GitHub откройте **Settings → Environments**, создайте `dev` и разрешите развёртывание из ветки по умолчанию. Добавьте туда **Environment variables** `TF_STATE_BUCKET`, `YC_CLOUD_ID`, `YC_FOLDER_ID`, `YC_SUBNET_ID`, `YC_ZONE`, `SSH_PUBLIC_KEY`. Последняя переменная содержит строку из публичного ключа. Необязательная `YC_BOOT_IMAGE_ID` фиксирует образ для повторяемого плана. В **Environment secrets** добавьте `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` и `YC_SA_KEY_JSON`. Для `stage` и `prod` используйте отдельные окружения, каталоги, подсети, бакеты и аккаунты. [Окружения GitHub Actions](https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments)
+3. Когда файл workflow будет в ветке по умолчанию, откройте **Actions → Task 2 Terraform → Run workflow**. Выберите `dev` и `deploy`, оставьте `apply` выключенным. Проверьте в Summary список операций. При пустом состоянии ожидаются две операции `create`. [Ручной запуск workflow](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow)
+4. После проверки запустите workflow с включённым `apply`. Он построит свежий план и применит именно этот файл в том же запуске. Проверьте ВМ, диски и state в консоли облака. Для очистки выберите `destroy`. Сначала запустите план с выключенным `apply`, затем подтвердите удаление запуском с включённым `apply`.
+
+В одном окружении облачные запуски выполняются последовательно. План и ключ Compute Cloud остаются во временной папке раннера до завершения шага. В Summary публикуются только адреса ресурсов и операции. GitHub принимает ручной запуск после появления файла workflow в ветке по умолчанию. До этого приведённый выше сценарий проверяет создание ресурсов и удалённое состояние напрямую из ветки PR.

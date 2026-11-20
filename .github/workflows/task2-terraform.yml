@@ -20,7 +20,7 @@ on:
         default: deploy
         options: [deploy, destroy]
       apply:
-        description: Request approval to apply the saved plan
+        description: Apply the plan in this run
         type: boolean
         default: false
 
@@ -34,12 +34,9 @@ concurrency:
 env:
   TF_IN_AUTOMATION: '1'
   TF_CLI_CONFIG_FILE: ${{ github.workspace }}/Task1Advanced/terraform.rc
-  AWS_DEFAULT_REGION: ru-central1
   AWS_EC2_METADATA_DISABLED: 'true'
   AWS_REQUEST_CHECKSUM_CALCULATION: when_required
   AWS_RESPONSE_CHECKSUM_VALIDATION: when_required
-  S3_ENDPOINT: https://storage.yandexcloud.net
-  TARGET_ENV: ${{ inputs.environment }}
 
 jobs:
   checks:
@@ -59,22 +56,17 @@ jobs:
       - if: always()
         run: docker compose -f Task2Advanced/compose.yaml down --volumes
 
-  plan:
-    name: Plan ${{ inputs.operation }} in ${{ inputs.environment }}
-    if: github.event_name == 'workflow_dispatch' && github.ref_type == 'branch' && github.ref_name == github.event.repository.default_branch
+  terraform:
+    name: ${{ inputs.operation }} in ${{ inputs.environment }}
+    if: github.event_name == 'workflow_dispatch' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
     needs: checks
     runs-on: ubuntu-24.04
-    timeout-minutes: 15
-    environment: ${{ inputs.environment }}-plan
+    timeout-minutes: 20
+    environment: ${{ inputs.environment }}
     defaults:
       run:
         shell: bash
         working-directory: Task2Advanced/terraform
-    outputs:
-      bucket: ${{ steps.plan.outputs.bucket }}
-      plan_key: ${{ steps.plan.outputs.plan_key }}
-      digest: ${{ steps.plan.outputs.digest }}
-      planned_at: ${{ steps.plan.outputs.planned_at }}
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
@@ -83,24 +75,22 @@ jobs:
         with:
           terraform_version: 1.11.4
           terraform_wrapper: false
-      - name: Initialize and create the plan
-        id: plan
+      - name: Initialize, plan and optionally apply
         env:
+          TARGET_ENV: ${{ inputs.environment }}
           OPERATION: ${{ inputs.operation }}
-          REQUEST_APPLY: ${{ inputs.apply }}
+          APPLY: ${{ inputs.apply }}
           TF_STATE_BUCKET: ${{ vars.TF_STATE_BUCKET }}
           TF_VAR_cloud_id: ${{ vars.YC_CLOUD_ID }}
           TF_VAR_folder_id: ${{ vars.YC_FOLDER_ID }}
           TF_VAR_subnet_id: ${{ vars.YC_SUBNET_ID }}
           TF_VAR_ssh_public_key: ${{ vars.SSH_PUBLIC_KEY }}
-          YC_BOOT_IMAGE_ID: ${{ vars.YC_BOOT_IMAGE_ID }}
           YC_ZONE: ${{ vars.YC_ZONE }}
+          YC_BOOT_IMAGE_ID: ${{ vars.YC_BOOT_IMAGE_ID }}
           YC_SA_KEY_JSON: ${{ secrets.YC_SA_KEY_JSON }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          set -u
-          umask 077
           case "$TARGET_ENV" in dev|stage|prod) ;; *) exit 1 ;; esac
           case "$OPERATION" in
             deploy) mode=() ;;
@@ -111,118 +101,30 @@ jobs:
           : "${TF_VAR_cloud_id:?Set YC_CLOUD_ID}" "${TF_VAR_folder_id:?Set YC_FOLDER_ID}"
           : "${TF_VAR_subnet_id:?Set YC_SUBNET_ID}" "${TF_VAR_ssh_public_key:?Set SSH_PUBLIC_KEY}"
           : "${AWS_ACCESS_KEY_ID:?Set AWS_ACCESS_KEY_ID}" "${AWS_SECRET_ACCESS_KEY:?Set AWS_SECRET_ACCESS_KEY}"
+          if [[ -n "$YC_BOOT_IMAGE_ID" ]]; then export TF_VAR_boot_image_id="$YC_BOOT_IMAGE_ID"; fi
+
+          umask 077
           export YC_SERVICE_ACCOUNT_KEY_FILE="$RUNNER_TEMP/task2-yc-key.json"
           plan="$RUNNER_TEMP/task2.tfplan"
           trap 'rm -f -- "$YC_SERVICE_ACCOUNT_KEY_FILE" "$plan"' EXIT
           printf '%s\n' "${YC_SA_KEY_JSON:?Set YC_SA_KEY_JSON}" > "$YC_SERVICE_ACCOUNT_KEY_FILE"
           unset YC_SA_KEY_JSON
-          if [[ -n "$YC_BOOT_IMAGE_ID" ]]; then export TF_VAR_boot_image_id="$YC_BOOT_IMAGE_ID"; fi
 
-          prefix="task2advanced/$TARGET_ENV"
           terraform init -input=false -no-color -lockfile=readonly \
-            -backend-config="bucket=$TF_STATE_BUCKET" -backend-config="key=$prefix/terraform.tfstate"
+            -backend-config="bucket=$TF_STATE_BUCKET" \
+            -backend-config="key=task2advanced/$TARGET_ENV/terraform.tfstate"
           terraform plan -input=false -no-color -lock-timeout=2m "${mode[@]}" \
             -var-file="../../Task1Advanced/envs/$TARGET_ENV/terraform.tfvars" \
             -var="name=task2-$TARGET_ENV" -var="zone=$YC_ZONE" -out="$plan" > /dev/null
 
-          {
-            # shellcheck disable=SC2016
-            printf '### План `%s` для `%s`\n\nКоммит `%s`\n\n' "$OPERATION" "$TARGET_ENV" "$GITHUB_SHA"
-            # shellcheck disable=SC2016
-            terraform show -json "$plan" | jq -r '
-              [(.resource_changes // [])[] | select(.change.actions != ["no-op"])] |
-              if length == 0 then "Нет изменений ресурсов."
-              else .[] | "- `\(.address)` — \(.change.actions | join(" → "))" end'
-          } >> "$GITHUB_STEP_SUMMARY"
+          printf '### %s · %s\n\n' "$OPERATION" "$TARGET_ENV" >> "$GITHUB_STEP_SUMMARY"
+          terraform show -json "$plan" | jq -r '
+            [(.resource_changes // [])[] | select(.change.actions != ["no-op"])] |
+            if length == 0 then "Нет изменений ресурсов."
+            else .[] | "- \(.address) — \(.change.actions | join(" → "))" end
+          ' >> "$GITHUB_STEP_SUMMARY"
 
-          if [[ "$REQUEST_APPLY" == true ]]; then
-            plan_key="$prefix/plans/$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT.tfplan"
-            digest=$(sha256sum "$plan" | cut -d ' ' -f 1)
-            aws --endpoint-url "$S3_ENDPOINT" s3api put-object \
-              --bucket "$TF_STATE_BUCKET" --key "$plan_key" --body "$plan" --if-none-match '*' > /dev/null
-            {
-              # shellcheck disable=SC2016
-              printf '\nСохранённый план `s3://%s/%s`\n' "$TF_STATE_BUCKET" "$plan_key"
-              # shellcheck disable=SC2016
-              printf '\nSHA-256 сохранённого плана: `%s`\n' "$digest"
-            } >> "$GITHUB_STEP_SUMMARY"
-            {
-              printf 'bucket=%s\nplan_key=%s\ndigest=%s\nplanned_at=%s\n' \
-                "$TF_STATE_BUCKET" "$plan_key" "$digest" "$(date +%s)"
-            } >> "$GITHUB_OUTPUT"
-          fi
-
-  apply:
-    name: Apply reviewed plan in ${{ inputs.environment }}
-    if: inputs.apply
-    needs: plan
-    runs-on: ubuntu-24.04
-    timeout-minutes: 20
-    environment: ${{ inputs.environment }}-apply
-    defaults:
-      run:
-        shell: bash
-        working-directory: Task2Advanced/terraform
-    env:
-      PLAN_KEY: ${{ needs.plan.outputs.plan_key }}
-      PLAN_DIGEST: ${{ needs.plan.outputs.digest }}
-      PLANNED_AT: ${{ needs.plan.outputs.planned_at }}
-      PLAN_BUCKET: ${{ needs.plan.outputs.bucket }}
-    steps:
-      - name: Verify plan age and run attempt
-        working-directory: .
-        run: |
-          set -u
-          if [[ "$PLAN_KEY" != "task2advanced/$TARGET_ENV/plans/$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT.tfplan" ||
-                ! "$PLAN_DIGEST" =~ ^[0-9a-f]{64}$ || ! "$PLANNED_AT" =~ ^[0-9]+$ ]]; then
-            echo 'Start a new run to generate a fresh plan.' >&2
-            exit 1
-          fi
-          if (( $(date +%s) - PLANNED_AT >= 7200 )); then
-            echo 'Plan is more than two hours old. Start a new run.' >&2
-            exit 1
-          fi
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-        with:
-          persist-credentials: false
-      - uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd # v3.1.2
-        with:
-          terraform_version: 1.11.4
-          terraform_wrapper: false
-      - name: Initialize and apply the approved file
-        env:
-          OPERATION: ${{ inputs.operation }}
-          TF_STATE_BUCKET: ${{ vars.TF_STATE_BUCKET }}
-          YC_SA_KEY_JSON: ${{ secrets.YC_SA_KEY_JSON }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |
-          set -u
-          umask 077
-          : "${TF_STATE_BUCKET:?Set TF_STATE_BUCKET}" "${AWS_ACCESS_KEY_ID:?Set AWS_ACCESS_KEY_ID}" "${AWS_SECRET_ACCESS_KEY:?Set AWS_SECRET_ACCESS_KEY}"
-          if [[ "$TF_STATE_BUCKET" != "$PLAN_BUCKET" ]]; then
-            echo 'Plan and apply must use the same state bucket.' >&2
-            exit 1
-          fi
-          export YC_SERVICE_ACCOUNT_KEY_FILE="$RUNNER_TEMP/task2-yc-key.json"
-          plan="$RUNNER_TEMP/task2.tfplan"
-          trap 'rm -f -- "$YC_SERVICE_ACCOUNT_KEY_FILE" "$plan"' EXIT
-          printf '%s\n' "${YC_SA_KEY_JSON:?Set YC_SA_KEY_JSON}" > "$YC_SERVICE_ACCOUNT_KEY_FILE"
-          unset YC_SA_KEY_JSON
-
-          aws --endpoint-url "$S3_ENDPOINT" s3api get-object \
-            --bucket "$TF_STATE_BUCKET" --key "$PLAN_KEY" "$plan" > /dev/null
-          printf '%s  %s\n' "$PLAN_DIGEST" "$plan" | sha256sum --check --status
-
-          terraform init -input=false -no-color -lockfile=readonly \
-            -backend-config="bucket=$TF_STATE_BUCKET" -backend-config="key=task2advanced/$TARGET_ENV/terraform.tfstate"
-          terraform apply -input=false -no-color -lock-timeout=2m "$plan" > /dev/null
-          if [[ "$OPERATION" == destroy ]]; then
-            resources=$(terraform state list)
-            test -z "$resources"
-            # shellcheck disable=SC2016
-            printf 'В state `%s` нет ресурсов.\n' "$TARGET_ENV" >> "$GITHUB_STEP_SUMMARY"
-          else
-            # shellcheck disable=SC2016
-            printf 'План для `%s` применён. Проверьте ВМ и два диска в Compute Cloud.\n' "$TARGET_ENV" >> "$GITHUB_STEP_SUMMARY"
+          if [[ "$APPLY" == true ]]; then
+            terraform apply -input=false -no-color -lock-timeout=2m "$plan" > /dev/null
+            printf '\nПлан применён.\n' >> "$GITHUB_STEP_SUMMARY"
           fi
