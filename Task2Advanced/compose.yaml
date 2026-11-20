@@ -1,0 +1,67 @@
+name: future-sprint11-state
+
+# Тестовая сеть Docker без опубликованных портов.
+x-demo-credentials: &demo-credentials
+  AWS_ACCESS_KEY_ID: local-review
+  AWS_SECRET_ACCESS_KEY: local-review-only
+
+services:
+  terraform:
+    image: hashicorp/terraform:1.11.4
+    working_dir: /repo/Task2Advanced/terraform
+    volumes:
+      - ..:/repo
+    environment:
+      TF_CLI_CONFIG_FILE: /repo/Task1Advanced/terraform.rc
+      TF_IN_AUTOMATION: "1"
+      YC_TOKEN:
+      YC_CLOUD_ID:
+      YC_FOLDER_ID:
+      TF_VAR_cloud_id:
+      TF_VAR_folder_id:
+      TF_VAR_subnet_id:
+      TF_VAR_zone:
+      TF_VAR_ssh_public_key:
+      TF_VAR_boot_image_id:
+      AWS_ACCESS_KEY_ID:
+      AWS_SECRET_ACCESS_KEY:
+
+  minio:
+    image: ghcr.io/salk-harnessing-plants-initiative/minio:RELEASE.2025-01-20T14-49-07Z@sha256:ed9be66eb5f2636c18289c34c3b725ddf57815f2777c77b5938543b78a44f144
+    command: server /data
+    environment:
+      MINIO_ROOT_USER: local-review
+      MINIO_ROOT_PASSWORD: local-review-only
+    volumes:
+      - demo-state:/data
+
+  bucket:
+    image: ghcr.io/salk-harnessing-plants-initiative/minio-mc:RELEASE.2025-08-13T08-35-41Z@sha256:a7fe349ef4bd8521fb8497f55c6042871b2ae640607cf99d9bede5e9bdf11727
+    depends_on:
+      - minio
+    environment: *demo-credentials
+    entrypoint: ["/bin/sh", "-ec"]
+    command:
+      - |
+        for attempt in $$(seq 1 45); do
+          if mc alias set lab http://minio:9000 "$$AWS_ACCESS_KEY_ID" "$$AWS_SECRET_ACCESS_KEY"; then break; fi
+          sleep 1
+        done
+        mc mb --ignore-existing lab/sprint-state
+        mc version enable lab/sprint-state
+
+  check:
+    image: hashicorp/terraform:1.11.4
+    depends_on:
+      bucket:
+        condition: service_completed_successfully
+    environment:
+      <<: *demo-credentials
+      TF_CLI_CONFIG_FILE: /repo/Task1Advanced/terraform.rc
+    volumes:
+      - ./local:/fixture:ro
+      - ..:/repo:ro
+    entrypoint: ["/bin/sh", "/fixture/check.sh"]
+
+volumes:
+  demo-state:

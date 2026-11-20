@@ -1,0 +1,443 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" compressed="false">
+  <diagram id="event-storming" name="Event Storming">
+    <mxGraphModel grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" page="0" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Event Storming · доменные сценарии" style="html=0;fontFamily=Arial;fontColor=#172539;text;fillColor=none;strokeColor=none;fontSize=26;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="18" y="8" width="1422" height="38" />
+        </mxCell>
+        <mxCell id="intro" value="Читайте строку слева направо. Агрегат фиксирует факт, подписчик обрабатывает его по указанному правилу." style="html=0;fontFamily=Arial;fontColor=#172539;text;fillColor=none;strokeColor=none;fontSize=15;fontStyle=0;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="18" y="48" width="1422" height="30" />
+        </mxCell>
+        <mxCell id="legend_actor" value="Актор / триггер" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fff5d6;strokeColor=#be9e51;fontSize=15;spacing=2;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="32" y="88" width="174" height="39" />
+        </mxCell>
+        <mxCell id="legend_command" value="Команда" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#e3f0fd;strokeColor=#779cc2;fontSize=15;spacing=2;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="228" y="88" width="210" height="39" />
+        </mxCell>
+        <mxCell id="legend_aggregate" value="Агрегат" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#f2edf7;strokeColor=#a291b3;fontSize=15;spacing=2;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="460" y="88" width="212" height="39" />
+        </mxCell>
+        <mxCell id="legend_event" value="Доменное событие" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fce8d5;strokeColor=#c48a56;fontSize=15;spacing=2;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="694" y="88" width="219" height="39" />
+        </mxCell>
+        <mxCell id="legend_policy" value="Политика" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#eadff4;strokeColor=#a17bb8;fontSize=15;spacing=2;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="935" y="88" width="266" height="39" />
+        </mxCell>
+        <mxCell id="legend_subscriber" value="Подписчик / проекция" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#e2f1e7;strokeColor=#74a88a;fontSize=15;spacing=2;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1223" y="88" width="203" height="39" />
+        </mxCell>
+        <mxCell id="clinical" value="Клиника и медицинский ИИ" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fbf8fd;strokeColor=#cbb8df;fontSize=15;spacing=2;container=1;recursiveResize=0;collapsible=0;align=left;spacingLeft=12;fontStyle=1;spacingTop=5;spacingBottom=4;arcSize=3;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="16" y="142" width="1426" height="310" />
+        </mxCell>
+        <mxCell id="visit_actor" value="Регистратор" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fff5d6;strokeColor=#be9e51;fontSize=14;spacing=2;" vertex="1" parent="clinical">
+          <mxGeometry as="geometry" x="16" y="39" width="174" height="55" />
+        </mxCell>
+        <mxCell id="visit_command" value="Зарегистрировать&#10;визит" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#e3f0fd;strokeColor=#779cc2;fontSize=14;spacing=2;" vertex="1" parent="clinical">
+          <mxGeometry as="geometry" x="212" y="39" width="210" height="55" />
+        </mxCell>
+        <mxCell id="visit_aggregate" value="CLINIC&#10;Визит" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#f2edf7;strokeColor=#a291b3;fontSize=14;spacing=2;" vertex="1" parent="clinical">
+          <mxGeometry as="geometry" x="444" y="39" width="212" height="55" />
+        </mxCell>
+        <mxCell id="visit_event" value="VisitRegistered" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fce8d5;strokeColor=#c48a56;fontSize=14;spacing=2;fontStyle=1;" vertex="1" parent="clinical">
+          <mxGeometry as="geometry" x="678" y="39" width="219" height="55" />
+        </mxCell>
+        <mxCell id="visit_policy" value="Открыть клинический&#10;эпизод один раз" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#eadff4;strokeColor=#a17bb8;fontSize=14;spacing=2;" vertex="1" parent="clinical">
+          <mxGeometry as="geometry" x="919" y="39" width="266" height="55" />
+        </mxCell>
+        <mxCell id="visit_subscriber" value="EHR&#10;Закрытый канал" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#f1e6fa;strokeColor=#a17bb8;fontSize=14;spacing=2;" vertex="1" parent="clinical">
+          <mxGeometry as="geometry" x="1207" y="39" width="203" height="55" />
+        </mxCell>
+        <mxCell id="visit-actor-command" source="visit_actor" target="visit_command" edge="1" parent="clinical" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="visit-command-aggregate" source="visit_command" target="visit_aggregate" edge="1" parent="clinical" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="visit-aggregate-event" source="visit_aggregate" target="visit_event" edge="1" parent="clinical" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="visit-event-policy" source="visit_event" target="visit_policy" edge="1" parent="clinical" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="visit-policy-subscriber" source="visit_policy" target="visit_subscriber" edge="1" parent="clinical" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="study_request_actor" value="Лечащий врач" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fff5d6;strokeColor=#be9e51;fontSize=14;spacing=2;" vertex="1" parent="clinical">
+          <mxGeometry as="geometry" x="16" y="104" width="174" height="55" />
+        </mxCell>
+        <mxCell id="study_request_command" value="Подтвердить&#10;назначение" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#e3f0fd;strokeColor=#779cc2;fontSize=14;spacing=2;" vertex="1" parent="clinical">
+          <mxGeometry as="geometry" x="212" y="104" width="210" height="55" />
+        </mxCell>
+        <mxCell id="study_request_aggregate" value="EHR&#10;Заявка на исследование" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#f2edf7;strokeColor=#a291b3;fontSize=14;spacing=2;" vertex="1" parent="clinical">
+          <mxGeometry as="geometry" x="444" y="104" width="212" height="55" />
+        </mxCell>
+        <mxCell id="study_request_event" value="ClinicalStudyRequested" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fce8d5;strokeColor=#c48a56;fontSize=14;spacing=2;fontStyle=1;" vertex="1" parent="clinical">
+          <mxGeometry as="geometry" x="678" y="104" width="219" height="55" />
+        </mxCell>
+        <mxCell id="study_request_policy" value="Передать заявку и ссылку&#10;в клиническом контуре" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#eadff4;strokeColor=#a17bb8;fontSize=14;spacing=2;" vertex="1" parent="clinical">
+          <mxGeometry as="geometry" x="919" y="104" width="266" height="55" />
+        </mxCell>
+        <mxCell id="study_request_subscriber" value="AI&#10;Закрытый канал" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#f1e6fa;strokeColor=#a17bb8;fontSize=14;spacing=2;" vertex="1" parent="clinical">
+          <mxGeometry as="geometry" x="1207" y="104" width="203" height="55" />
+        </mxCell>
+        <mxCell id="study_request-actor-command" source="study_request_actor" target="study_request_command" edge="1" parent="clinical" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="study_request-command-aggregate" source="study_request_command" target="study_request_aggregate" edge="1" parent="clinical" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="study_request-aggregate-event" source="study_request_aggregate" target="study_request_event" edge="1" parent="clinical" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="study_request-event-policy" source="study_request_event" target="study_request_policy" edge="1" parent="clinical" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="study_request-policy-subscriber" source="study_request_policy" target="study_request_subscriber" edge="1" parent="clinical" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="study_complete_actor" value="Сервис ИИ" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fff5d6;strokeColor=#be9e51;fontSize=14;spacing=2;" vertex="1" parent="clinical">
+          <mxGeometry as="geometry" x="16" y="169" width="174" height="55" />
+        </mxCell>
+        <mxCell id="study_complete_command" value="Завершить анализ" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#e3f0fd;strokeColor=#779cc2;fontSize=14;spacing=2;" vertex="1" parent="clinical">
+          <mxGeometry as="geometry" x="212" y="169" width="210" height="55" />
+        </mxCell>
+        <mxCell id="study_complete_aggregate" value="AI&#10;Задание ИИ" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#f2edf7;strokeColor=#a291b3;fontSize=14;spacing=2;" vertex="1" parent="clinical">
+          <mxGeometry as="geometry" x="444" y="169" width="212" height="55" />
+        </mxCell>
+        <mxCell id="study_complete_event" value="AIStudyCompleted" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fce8d5;strokeColor=#c48a56;fontSize=14;spacing=2;fontStyle=1;" vertex="1" parent="clinical">
+          <mxGeometry as="geometry" x="678" y="169" width="219" height="55" />
+        </mxCell>
+        <mxCell id="study_complete_policy" value="Привязать результат&#10;к заявке по её ID" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#eadff4;strokeColor=#a17bb8;fontSize=14;spacing=2;" vertex="1" parent="clinical">
+          <mxGeometry as="geometry" x="919" y="169" width="266" height="55" />
+        </mxCell>
+        <mxCell id="study_complete_subscriber" value="EHR&#10;Закрытый канал" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#f1e6fa;strokeColor=#a17bb8;fontSize=14;spacing=2;" vertex="1" parent="clinical">
+          <mxGeometry as="geometry" x="1207" y="169" width="203" height="55" />
+        </mxCell>
+        <mxCell id="study_complete-actor-command" source="study_complete_actor" target="study_complete_command" edge="1" parent="clinical" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="study_complete-command-aggregate" source="study_complete_command" target="study_complete_aggregate" edge="1" parent="clinical" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="study_complete-aggregate-event" source="study_complete_aggregate" target="study_complete_event" edge="1" parent="clinical" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="study_complete-event-policy" source="study_complete_event" target="study_complete_policy" edge="1" parent="clinical" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="study_complete-policy-subscriber" source="study_complete_policy" target="study_complete_subscriber" edge="1" parent="clinical" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="ai_usage_actor" value="Сервис ИИ" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fff5d6;strokeColor=#be9e51;fontSize=14;spacing=2;" vertex="1" parent="clinical">
+          <mxGeometry as="geometry" x="16" y="234" width="174" height="55" />
+        </mxCell>
+        <mxCell id="ai_usage_command" value="Зафиксировать&#10;итог окна" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#e3f0fd;strokeColor=#779cc2;fontSize=14;spacing=2;" vertex="1" parent="clinical">
+          <mxGeometry as="geometry" x="212" y="234" width="210" height="55" />
+        </mxCell>
+        <mxCell id="ai_usage_aggregate" value="AI&#10;Учёт использования" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#f2edf7;strokeColor=#a291b3;fontSize=14;spacing=2;" vertex="1" parent="clinical">
+          <mxGeometry as="geometry" x="444" y="234" width="212" height="55" />
+        </mxCell>
+        <mxCell id="ai_usage_event" value="AIUsageRecorded" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fce8d5;strokeColor=#c48a56;fontSize=14;spacing=2;fontStyle=1;" vertex="1" parent="clinical">
+          <mxGeometry as="geometry" x="678" y="234" width="219" height="55" />
+        </mxCell>
+        <mxCell id="ai_usage_policy" value="Обновить версию окна&#10;по разрешённым измерениям" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#eadff4;strokeColor=#a17bb8;fontSize=14;spacing=2;" vertex="1" parent="clinical">
+          <mxGeometry as="geometry" x="919" y="234" width="266" height="55" />
+        </mxCell>
+        <mxCell id="ai_usage_subscriber" value="Витрина использования ИИ&#10;→ BI" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#e2f1e7;strokeColor=#74a88a;fontSize=14;spacing=2;" vertex="1" parent="clinical">
+          <mxGeometry as="geometry" x="1207" y="234" width="203" height="55" />
+        </mxCell>
+        <mxCell id="ai_usage-actor-command" source="ai_usage_actor" target="ai_usage_command" edge="1" parent="clinical" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="ai_usage-command-aggregate" source="ai_usage_command" target="ai_usage_aggregate" edge="1" parent="clinical" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="ai_usage-aggregate-event" source="ai_usage_aggregate" target="ai_usage_event" edge="1" parent="clinical" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="ai_usage-event-policy" source="ai_usage_event" target="ai_usage_policy" edge="1" parent="clinical" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="ai_usage-policy-subscriber" source="ai_usage_policy" target="ai_usage_subscriber" edge="1" parent="clinical" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="accounts" value="Выставление счетов, банковские расчёты и кредитование" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fdfaf2;strokeColor=#dfc894;fontSize=15;spacing=2;container=1;recursiveResize=0;collapsible=0;align=left;spacingLeft=12;fontStyle=1;spacingTop=5;spacingBottom=4;arcSize=3;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="16" y="466" width="1426" height="375" />
+        </mxCell>
+        <mxCell id="invoice_actor" value="Расчётчик клиники" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fff5d6;strokeColor=#be9e51;fontSize=14;spacing=2;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="16" y="39" width="174" height="55" />
+        </mxCell>
+        <mxCell id="invoice_command" value="Выставить счёт" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#e3f0fd;strokeColor=#779cc2;fontSize=14;spacing=2;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="212" y="39" width="210" height="55" />
+        </mxCell>
+        <mxCell id="invoice_aggregate" value="BILL&#10;Счёт" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#f2edf7;strokeColor=#a291b3;fontSize=14;spacing=2;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="444" y="39" width="212" height="55" />
+        </mxCell>
+        <mxCell id="invoice_event" value="InvoiceIssued" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fce8d5;strokeColor=#c48a56;fontSize=14;spacing=2;fontStyle=1;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="678" y="39" width="219" height="55" />
+        </mxCell>
+        <mxCell id="invoice_policy" value="Передать непрозрачную&#10;ссылку, сумму и валюту" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#eadff4;strokeColor=#a17bb8;fontSize=14;spacing=2;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="919" y="39" width="266" height="55" />
+        </mxCell>
+        <mxCell id="invoice_subscriber" value="PAY и витрина&#10;оплат счетов" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#e2f1e7;strokeColor=#74a88a;fontSize=14;spacing=2;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="1207" y="39" width="203" height="55" />
+        </mxCell>
+        <mxCell id="invoice-actor-command" source="invoice_actor" target="invoice_command" edge="1" parent="accounts" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="invoice-command-aggregate" source="invoice_command" target="invoice_aggregate" edge="1" parent="accounts" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="invoice-aggregate-event" source="invoice_aggregate" target="invoice_event" edge="1" parent="accounts" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="invoice-event-policy" source="invoice_event" target="invoice_policy" edge="1" parent="accounts" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="invoice-policy-subscriber" source="invoice_policy" target="invoice_subscriber" edge="1" parent="accounts" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="payment_actor" value="Плательщик&#10;через банк" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fff5d6;strokeColor=#be9e51;fontSize=14;spacing=2;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="16" y="104" width="174" height="55" />
+        </mxCell>
+        <mxCell id="payment_command" value="Провести платёж" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#e3f0fd;strokeColor=#779cc2;fontSize=14;spacing=2;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="212" y="104" width="210" height="55" />
+        </mxCell>
+        <mxCell id="payment_aggregate" value="PAY&#10;Платёж по счёту" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#f2edf7;strokeColor=#a291b3;fontSize=14;spacing=2;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="444" y="104" width="212" height="55" />
+        </mxCell>
+        <mxCell id="payment_event" value="PaymentPosted" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fce8d5;strokeColor=#c48a56;fontSize=14;spacing=2;fontStyle=1;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="678" y="104" width="219" height="55" />
+        </mxCell>
+        <mxCell id="payment_policy" value="Учесть платёж по счёту.&#10;Частичная оплата&#10;сохраняет остаток" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#eadff4;strokeColor=#a17bb8;fontSize=14;spacing=2;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="919" y="104" width="266" height="55" />
+        </mxCell>
+        <mxCell id="payment_subscriber" value="BILL и витрина&#10;оплат счетов" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#e2f1e7;strokeColor=#74a88a;fontSize=14;spacing=2;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="1207" y="104" width="203" height="55" />
+        </mxCell>
+        <mxCell id="payment-actor-command" source="payment_actor" target="payment_command" edge="1" parent="accounts" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="payment-command-aggregate" source="payment_command" target="payment_aggregate" edge="1" parent="accounts" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="payment-aggregate-event" source="payment_aggregate" target="payment_event" edge="1" parent="accounts" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="payment-event-policy" source="payment_event" target="payment_policy" edge="1" parent="accounts" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="payment-policy-subscriber" source="payment_policy" target="payment_subscriber" edge="1" parent="accounts" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="settle_actor" value="Политика BILL&#10;после проводки" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#eadff4;strokeColor=#a17bb8;fontSize=14;spacing=2;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="16" y="169" width="174" height="55" />
+        </mxCell>
+        <mxCell id="settle_command" value="Закрыть счёт&#10;при нулевом остатке" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#e3f0fd;strokeColor=#779cc2;fontSize=14;spacing=2;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="212" y="169" width="210" height="55" />
+        </mxCell>
+        <mxCell id="settle_aggregate" value="BILL&#10;Счёт" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#f2edf7;strokeColor=#a291b3;fontSize=14;spacing=2;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="444" y="169" width="212" height="55" />
+        </mxCell>
+        <mxCell id="settle_event" value="InvoiceSettled" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fce8d5;strokeColor=#c48a56;fontSize=14;spacing=2;fontStyle=1;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="678" y="169" width="219" height="55" />
+        </mxCell>
+        <mxCell id="settle_policy" value="Учесть закрытие&#10;текущего цикла оплаты" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#eadff4;strokeColor=#a17bb8;fontSize=14;spacing=2;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="919" y="169" width="266" height="55" />
+        </mxCell>
+        <mxCell id="settle_subscriber" value="Витрина&#10;оплат счетов" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#e2f1e7;strokeColor=#74a88a;fontSize=14;spacing=2;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="1207" y="169" width="203" height="55" />
+        </mxCell>
+        <mxCell id="settle-actor-command" source="settle_actor" target="settle_command" edge="1" parent="accounts" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="settle-command-aggregate" source="settle_command" target="settle_aggregate" edge="1" parent="accounts" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="settle-aggregate-event" source="settle_aggregate" target="settle_event" edge="1" parent="accounts" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="settle-event-policy" source="settle_event" target="settle_policy" edge="1" parent="accounts" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="settle-policy-subscriber" source="settle_policy" target="settle_subscriber" edge="1" parent="accounts" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="refund_actor" value="Оператор банка" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fff5d6;strokeColor=#be9e51;fontSize=14;spacing=2;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="16" y="234" width="174" height="55" />
+        </mxCell>
+        <mxCell id="refund_command" value="Провести возврат" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#e3f0fd;strokeColor=#779cc2;fontSize=14;spacing=2;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="212" y="234" width="210" height="55" />
+        </mxCell>
+        <mxCell id="refund_aggregate" value="PAY&#10;Платёж по счёту" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#f2edf7;strokeColor=#a291b3;fontSize=14;spacing=2;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="444" y="234" width="212" height="55" />
+        </mxCell>
+        <mxCell id="refund_event" value="RefundPosted" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fce8d5;strokeColor=#c48a56;fontSize=14;spacing=2;fontStyle=1;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="678" y="234" width="219" height="55" />
+        </mxCell>
+        <mxCell id="refund_policy" value="Учесть возврат по проводке&#10;и пересчитать остаток" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#eadff4;strokeColor=#a17bb8;fontSize=14;spacing=2;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="919" y="234" width="266" height="55" />
+        </mxCell>
+        <mxCell id="refund_subscriber" value="BILL и витрина&#10;оплат счетов" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#e2f1e7;strokeColor=#74a88a;fontSize=14;spacing=2;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="1207" y="234" width="203" height="55" />
+        </mxCell>
+        <mxCell id="refund-actor-command" source="refund_actor" target="refund_command" edge="1" parent="accounts" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="refund-command-aggregate" source="refund_command" target="refund_aggregate" edge="1" parent="accounts" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="refund-aggregate-event" source="refund_aggregate" target="refund_event" edge="1" parent="accounts" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="refund-event-policy" source="refund_event" target="refund_policy" edge="1" parent="accounts" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="refund-policy-subscriber" source="refund_policy" target="refund_subscriber" edge="1" parent="accounts" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="loan_actor" value="Кредитный специалист&#10;и заёмщик" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fff5d6;strokeColor=#be9e51;fontSize=14;spacing=2;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="16" y="299" width="174" height="55" />
+        </mxCell>
+        <mxCell id="loan_command" value="Зарегистрировать&#10;подписанный договор" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#e3f0fd;strokeColor=#779cc2;fontSize=14;spacing=2;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="212" y="299" width="210" height="55" />
+        </mxCell>
+        <mxCell id="loan_aggregate" value="LOAN&#10;Кредитный договор" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#f2edf7;strokeColor=#a291b3;fontSize=14;spacing=2;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="444" y="299" width="212" height="55" />
+        </mxCell>
+        <mxCell id="loan_event" value="LoanAgreementSigned" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fce8d5;strokeColor=#c48a56;fontSize=14;spacing=2;fontStyle=1;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="678" y="299" width="219" height="55" />
+        </mxCell>
+        <mxCell id="loan_policy" value="Передать сведения расчётам&#10;по внутрибанковскому контракту" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#eadff4;strokeColor=#a17bb8;fontSize=14;spacing=2;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="919" y="299" width="266" height="55" />
+        </mxCell>
+        <mxCell id="loan_subscriber" value="PAY&#10;Закрытый канал" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fbefcd;strokeColor=#bf9953;fontSize=14;spacing=2;" vertex="1" parent="accounts">
+          <mxGeometry as="geometry" x="1207" y="299" width="203" height="55" />
+        </mxCell>
+        <mxCell id="loan-actor-command" source="loan_actor" target="loan_command" edge="1" parent="accounts" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="loan-command-aggregate" source="loan_command" target="loan_aggregate" edge="1" parent="accounts" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="loan-aggregate-event" source="loan_aggregate" target="loan_event" edge="1" parent="accounts" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="loan-event-policy" source="loan_event" target="loan_policy" edge="1" parent="accounts" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="loan-policy-subscriber" source="loan_policy" target="loan_subscriber" edge="1" parent="accounts" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="partners" value="Поставки, оборудование и корпоративные показатели" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#f4faf6;strokeColor=#aecdbb;fontSize=15;spacing=2;container=1;recursiveResize=0;collapsible=0;align=left;spacingLeft=12;fontStyle=1;spacingTop=5;spacingBottom=4;arcSize=3;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="16" y="855" width="1426" height="245" />
+        </mxCell>
+        <mxCell id="batch_actor" value="Сотрудник площадки" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fff5d6;strokeColor=#be9e51;fontSize=14;spacing=2;" vertex="1" parent="partners">
+          <mxGeometry as="geometry" x="16" y="39" width="174" height="55" />
+        </mxCell>
+        <mxCell id="batch_command" value="Подтвердить приёмку&#10;партии" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#e3f0fd;strokeColor=#779cc2;fontSize=14;spacing=2;" vertex="1" parent="partners">
+          <mxGeometry as="geometry" x="212" y="39" width="210" height="55" />
+        </mxCell>
+        <mxCell id="batch_aggregate" value="PHARMA&#10;Поставка" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#f2edf7;strokeColor=#a291b3;fontSize=14;spacing=2;" vertex="1" parent="partners">
+          <mxGeometry as="geometry" x="444" y="39" width="212" height="55" />
+        </mxCell>
+        <mxCell id="batch_event" value="BatchDelivered" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fce8d5;strokeColor=#c48a56;fontSize=14;spacing=2;fontStyle=1;" vertex="1" parent="partners">
+          <mxGeometry as="geometry" x="678" y="39" width="219" height="55" />
+        </mxCell>
+        <mxCell id="batch_policy" value="Проецировать поставку&#10;по партии и площадке" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#eadff4;strokeColor=#a17bb8;fontSize=14;spacing=2;" vertex="1" parent="partners">
+          <mxGeometry as="geometry" x="919" y="39" width="266" height="55" />
+        </mxCell>
+        <mxCell id="batch_subscriber" value="Витрина поставок&#10;→ BI" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#e2f1e7;strokeColor=#74a88a;fontSize=14;spacing=2;" vertex="1" parent="partners">
+          <mxGeometry as="geometry" x="1207" y="39" width="203" height="55" />
+        </mxCell>
+        <mxCell id="batch-actor-command" source="batch_actor" target="batch_command" edge="1" parent="partners" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="batch-command-aggregate" source="batch_command" target="batch_aggregate" edge="1" parent="partners" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="batch-aggregate-event" source="batch_aggregate" target="batch_event" edge="1" parent="partners" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="batch-event-policy" source="batch_event" target="batch_policy" edge="1" parent="partners" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="batch-policy-subscriber" source="batch_policy" target="batch_subscriber" edge="1" parent="partners" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="device_actor" value="Инженер или&#10;сервис поставщика" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fff5d6;strokeColor=#be9e51;fontSize=14;spacing=2;" vertex="1" parent="partners">
+          <mxGeometry as="geometry" x="16" y="104" width="174" height="55" />
+        </mxCell>
+        <mxCell id="device_command" value="Обновить статус&#10;оборудования" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#e3f0fd;strokeColor=#779cc2;fontSize=14;spacing=2;" vertex="1" parent="partners">
+          <mxGeometry as="geometry" x="212" y="104" width="210" height="55" />
+        </mxCell>
+        <mxCell id="device_aggregate" value="DEVICE&#10;Устройство" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#f2edf7;strokeColor=#a291b3;fontSize=14;spacing=2;" vertex="1" parent="partners">
+          <mxGeometry as="geometry" x="444" y="104" width="212" height="55" />
+        </mxCell>
+        <mxCell id="device_event" value="DeviceStatusChanged" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fce8d5;strokeColor=#c48a56;fontSize=14;spacing=2;fontStyle=1;" vertex="1" parent="partners">
+          <mxGeometry as="geometry" x="678" y="104" width="219" height="55" />
+        </mxCell>
+        <mxCell id="device_policy" value="Обновить статус устройства&#10;и пересчитать итог площадки" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#eadff4;strokeColor=#a17bb8;fontSize=14;spacing=2;" vertex="1" parent="partners">
+          <mxGeometry as="geometry" x="919" y="104" width="266" height="55" />
+        </mxCell>
+        <mxCell id="device_subscriber" value="Витрина эксплуатации&#10;→ BI" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#e2f1e7;strokeColor=#74a88a;fontSize=14;spacing=2;" vertex="1" parent="partners">
+          <mxGeometry as="geometry" x="1207" y="104" width="203" height="55" />
+        </mxCell>
+        <mxCell id="device-actor-command" source="device_actor" target="device_command" edge="1" parent="partners" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="device-command-aggregate" source="device_command" target="device_aggregate" edge="1" parent="partners" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="device-aggregate-event" source="device_aggregate" target="device_event" edge="1" parent="partners" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="device-event-policy" source="device_event" target="device_policy" edge="1" parent="partners" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="device-policy-subscriber" source="device_policy" target="device_subscriber" edge="1" parent="partners" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="kpi_actor" value="Методолог&#10;головного офиса" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fff5d6;strokeColor=#be9e51;fontSize=14;spacing=2;" vertex="1" parent="partners">
+          <mxGeometry as="geometry" x="16" y="169" width="174" height="55" />
+        </mxCell>
+        <mxCell id="kpi_command" value="Опубликовать&#10;определение KPI" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#e3f0fd;strokeColor=#779cc2;fontSize=14;spacing=2;" vertex="1" parent="partners">
+          <mxGeometry as="geometry" x="212" y="169" width="210" height="55" />
+        </mxCell>
+        <mxCell id="kpi_aggregate" value="KPI&#10;Показатель" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#f2edf7;strokeColor=#a291b3;fontSize=14;spacing=2;" vertex="1" parent="partners">
+          <mxGeometry as="geometry" x="444" y="169" width="212" height="55" />
+        </mxCell>
+        <mxCell id="kpi_event" value="KpiDefinitionPublished" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fce8d5;strokeColor=#c48a56;fontSize=14;spacing=2;fontStyle=1;" vertex="1" parent="partners">
+          <mxGeometry as="geometry" x="678" y="169" width="219" height="55" />
+        </mxCell>
+        <mxCell id="kpi_policy" value="Подключить версию формулы&#10;и разрешённые измерения" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#eadff4;strokeColor=#a17bb8;fontSize=14;spacing=2;" vertex="1" parent="partners">
+          <mxGeometry as="geometry" x="919" y="169" width="266" height="55" />
+        </mxCell>
+        <mxCell id="kpi_subscriber" value="BI-портал" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#e2f1e7;strokeColor=#74a88a;fontSize=14;spacing=2;" vertex="1" parent="partners">
+          <mxGeometry as="geometry" x="1207" y="169" width="203" height="55" />
+        </mxCell>
+        <mxCell id="kpi-actor-command" source="kpi_actor" target="kpi_command" edge="1" parent="partners" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="kpi-command-aggregate" source="kpi_command" target="kpi_aggregate" edge="1" parent="partners" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="kpi-aggregate-event" source="kpi_aggregate" target="kpi_event" edge="1" parent="partners" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="kpi-event-policy" source="kpi_event" target="kpi_policy" edge="1" parent="partners" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="kpi-policy-subscriber" source="kpi_policy" target="kpi_subscriber" edge="1" parent="partners" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;strokeColor=#63778a;exitX=1;exitY=0.5;entryX=0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="delivery" value="Каждая проводка учитывается один раз по posting_id, повторная доставка — по event_id. Частичный возврат может снова открыть остаток.&#10;Клинический результат доступен EHR. В аналитическую витрину ИИ публикуется разрешённый итог окна AIUsageRecorded." style="html=0;fontFamily=Arial;fontColor=#172539;text;fillColor=none;strokeColor=none;fontSize=14;fontStyle=0;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="22" y="1114" width="1414" height="65" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

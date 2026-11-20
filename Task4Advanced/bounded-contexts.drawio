@@ -1,0 +1,323 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" compressed="false">
+  <diagram id="bounded-contexts" name="Карта контекстов">
+    <mxGraphModel grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" page="0" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="cluster_clinical" value="Клинический контур" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#faf7fd;strokeColor=#cbb8df;fontSize=15;spacing=2;container=1;recursiveResize=0;collapsible=0;align=left;spacingLeft=12;fontStyle=1;spacingTop=5;spacingBottom=4;arcSize=3;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="452.33" y="145.34" width="685.59" height="225.38" />
+        </mxCell>
+        <mxCell id="cluster_bank" value="Банковский контур" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fdfaf0;strokeColor=#e1c78c;fontSize=15;spacing=2;container=1;recursiveResize=0;collapsible=0;align=left;spacingLeft=12;fontStyle=1;spacingTop=5;spacingBottom=4;arcSize=3;verticalAlign=bottom;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="478.98" y="564.24" width="203.59" height="225.38" />
+        </mxCell>
+        <mxCell id="cluster_analytics" value="Продукты данных" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#f4faf6;strokeColor=#a7c9b6;fontSize=15;spacing=2;container=1;recursiveResize=0;collapsible=0;align=right;spacingLeft=12;fontStyle=1;spacingTop=5;spacingBottom=4;arcSize=3;verticalAlign=top;spacingRight=12;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="928.35" y="538.28" width="426.76" height="487.34" />
+        </mxCell>
+        <mxCell id="title" value="Карта ограниченных контекстов" style="html=0;fontFamily=Arial;fontColor=#172539;text;fillColor=none;strokeColor=none;fontSize=25;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="22" y="8" width="1600" height="35" />
+        </mxCell>
+        <mxCell id="legend" value="Стрелка события идёт от владельца контракта к подписчику. PL — опубликованный язык домена.&#10;OHS — опубликованный интерфейс. ACL — адаптер потребителя. Пунктир обозначает внешние взаимодействия.&#10;Фиолетовый — клинический канал, охра — внутрибанковский канал, зелёный — публикация для аналитики." style="html=0;fontFamily=Arial;fontColor=#172539;text;fillColor=none;strokeColor=none;fontSize=14;fontStyle=0;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="22" y="45" width="1600" height="68" />
+        </mxCell>
+        <mxCell id="register_staff" value="Регистраторы&#10;и пациенты" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=white;strokeColor=#7d91a6;fontSize=13;spacing=2;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="89.97" y="190.53" width="131.46" height="48.85" />
+        </mxCell>
+        <mxCell id="clinicians" value="Врачи" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=white;strokeColor=#7d91a6;fontSize=13;spacing=2;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="116.55" y="321.16" width="78.3" height="42.48" />
+        </mxCell>
+        <mxCell id="billing_staff" value="Расчётчики клиник" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=white;strokeColor=#7d91a6;fontSize=13;spacing=2;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="72.03" y="446.24" width="167.34" height="42.48" />
+        </mxCell>
+        <mxCell id="bank_clients" value="Клиенты и&#10;сотрудники банка" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=white;strokeColor=#7d91a6;fontSize=13;spacing=2;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="76.37" y="701.47" width="158.65" height="48.85" />
+        </mxCell>
+        <mxCell id="pharma_partner" value="Фармпоставщик&#10;и площадка приёмки" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=white;strokeColor=#7d91a6;fontSize=13;spacing=2;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="76.37" y="832.45" width="158.65" height="48.85" />
+        </mxCell>
+        <mxCell id="device_partner" value="Будущие партнёры&#10;Производитель и сервис" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=white;strokeColor=#7d91a6;fontSize=13;spacing=2;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="49.19" y="963.43" width="213.02" height="48.85" />
+        </mxCell>
+        <mxCell id="hq" value="Головной офис" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=white;strokeColor=#7d91a6;fontSize=13;spacing=2;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="85.08" y="1094.06" width="141.24" height="42.48" />
+        </mxCell>
+        <mxCell id="CLINIC" value="CLINIC&#10;Регистратура" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#f1e6fa;strokeColor=#9d7eb6;fontSize=13;spacing=2;fontStyle=1;" vertex="1" parent="cluster_clinical">
+          <mxGeometry as="geometry" x="64.89" y="35.75" width="127.11" height="48.85" />
+        </mxCell>
+        <mxCell id="EHR" value="EHR&#10;Клиническая документация" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#f1e6fa;strokeColor=#9d7eb6;fontSize=13;spacing=2;fontStyle=1;" vertex="1" parent="cluster_clinical">
+          <mxGeometry as="geometry" x="11.6" y="166.73" width="233.68" height="48.85" />
+        </mxCell>
+        <mxCell id="AI" value="AI&#10;Медицинский ИИ" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#f1e6fa;strokeColor=#9d7eb6;fontSize=13;spacing=2;fontStyle=1;" vertex="1" parent="cluster_clinical">
+          <mxGeometry as="geometry" x="518.61" y="126.61" width="155.38" height="48.85" />
+        </mxCell>
+        <mxCell id="BILL" value="BILL&#10;Выставление счетов клиники" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#f0f5fa;strokeColor=#7d91a6;fontSize=13;spacing=2;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="457.95" y="443.05" width="245.64" height="48.85" />
+        </mxCell>
+        <mxCell id="LOAN" value="LOAN&#10;Кредитование" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fbf0cd;strokeColor=#bd9851;fontSize=13;spacing=2;fontStyle=1;" vertex="1" parent="cluster_bank">
+          <mxGeometry as="geometry" x="34.43" y="140.77" width="134.72" height="48.85" />
+        </mxCell>
+        <mxCell id="PAY" value="PAY&#10;Банковские расчёты" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#fbf0cd;strokeColor=#bd9851;fontSize=13;spacing=2;fontStyle=1;" vertex="1" parent="cluster_bank">
+          <mxGeometry as="geometry" x="11.59" y="9.79" width="180.39" height="48.85" />
+        </mxCell>
+        <mxCell id="PHARMA" value="PHARMA&#10;Поставки фармы" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#f0f5fa;strokeColor=#7d91a6;fontSize=13;spacing=2;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="503.08" y="835.99" width="155.38" height="48.85" />
+        </mxCell>
+        <mxCell id="DEVICE" value="DEVICE&#10;Эксплуатация оборудования" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#f0f5fa;strokeColor=#7d91a6;fontSize=13;spacing=2;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="459.58" y="966.97" width="242.39" height="48.85" />
+        </mxCell>
+        <mxCell id="KPI" value="KPI&#10;Корпоративные показатели" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#f0f5fa;strokeColor=#7d91a6;fontSize=13;spacing=2;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="463.39" y="1097.95" width="234.76" height="48.85" />
+        </mxCell>
+        <mxCell id="ai_product" value="Витрина&#10;Использование ИИ" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#e3f2e8;strokeColor=#76a58a;fontSize=13;spacing=2;" vertex="1" parent="cluster_analytics">
+          <mxGeometry as="geometry" x="33.89" y="35.75" width="172.78" height="48.85" />
+        </mxCell>
+        <mxCell id="finance_product" value="Витрина&#10;Оплаты счетов" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#e3f2e8;strokeColor=#76a58a;fontSize=13;spacing=2;" vertex="1" parent="cluster_analytics">
+          <mxGeometry as="geometry" x="49.11" y="166.73" width="142.33" height="48.85" />
+        </mxCell>
+        <mxCell id="pharma_product" value="Витрина&#10;Поставки по партиям" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#e3f2e8;strokeColor=#76a58a;fontSize=13;spacing=2;" vertex="1" parent="cluster_analytics">
+          <mxGeometry as="geometry" x="27.36" y="297.71" width="185.83" height="48.85" />
+        </mxCell>
+        <mxCell id="device_product" value="Витрина&#10;Состояние оборудования" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#e3f2e8;strokeColor=#76a58a;fontSize=13;spacing=2;" vertex="1" parent="cluster_analytics">
+          <mxGeometry as="geometry" x="11.59" y="428.69" width="217.37" height="48.85" />
+        </mxCell>
+        <mxCell id="BI" value="BI-портал&#10;Отчёты по витринам" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=#e3f2e8;strokeColor=#76a58a;fontSize=13;spacing=2;fontStyle=1;" vertex="1" parent="cluster_analytics">
+          <mxGeometry as="geometry" x="272.03" y="297.71" width="145" height="48.85" />
+        </mxCell>
+        <mxCell id="bi_users" value="Аналитики доменов&#10;и головного офиса" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=white;strokeColor=#7d91a6;fontSize=13;spacing=2;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1489.54" y="835.99" width="176.05" height="48.85" />
+        </mxCell>
+        <mxCell id="legacy" value="Переходный источник&#10;SQL Server 2008 · Apache Camel" style="html=0;fontFamily=Arial;fontColor=#172539;rounded=1;arcSize=13;fillColor=white;strokeColor=#7d91a6;fontSize=13;spacing=2;dashed=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="22" y="570.49" width="267.39" height="48.85" />
+        </mxCell>
+        <mxCell id="rel-0" source="CLINIC" target="EHR" edge="1" parent="1" value="VisitRegistered" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#8655a5;fontColor=#653780;exitX=0.5;exitY=1;exitPerimeter=0;entryX=0.5;entryY=0;entryPerimeter=0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="580.77" y="250.64" />
+              <mxPoint x="580.77" y="279.52" />
+            </Array>
+            <mxPoint as="offset" x="-13.05" y="0.05" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-1" source="EHR" target="AI" edge="1" parent="1" value="ClinicalStudyRequested" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#8655a5;fontColor=#653780;exitX=1;exitY=1;exitPerimeter=0;entryX=0.01;entryY=1;entryPerimeter=0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="908.34" y="330.21" />
+            </Array>
+            <mxPoint as="offset" x="-14.67" y="-18.48" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-2" source="AI" target="EHR" edge="1" parent="1" value="AIStudyCompleted" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#8655a5;fontColor=#653780;exitX=0;exitY=0;exitPerimeter=0;entryX=0.99;entryY=0;entryPerimeter=0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="725.35" y="305.82" />
+              <mxPoint x="715.59" y="307.91" />
+            </Array>
+            <mxPoint as="offset" x="-11.58" y="-18.03" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-3" source="LOAN" target="PAY" edge="1" parent="1" value="LoanAgreementSigned" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#a47930;fontColor=#7c561b;exitX=0.5;exitY=0;exitPerimeter=0;entryX=0.5;entryY=1;entryPerimeter=0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="580.77" y="684.2" />
+              <mxPoint x="580.77" y="655.32" />
+            </Array>
+            <mxPoint as="offset" x="-13.05" y="0.05" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-4" source="ai_product" target="BI" edge="1" parent="1" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#647990;fontColor=#30445b;exitX=0.69;exitY=1;exitPerimeter=0;entryX=0.01;entryY=0;entryPerimeter=0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1112.78" y="648.81" />
+              <mxPoint x="1157.32" y="684.6" />
+              <mxPoint x="1189.61" y="793.38" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-5" source="finance_product" target="BI" edge="1" parent="1" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#647990;fontColor=#30445b;exitX=0.81;exitY=1;exitPerimeter=0;entryX=0.2;entryY=0;entryPerimeter=0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1128.55" y="775.87" />
+              <mxPoint x="1181.09" y="806.95" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-6" source="pharma_product" target="BI" edge="1" parent="1" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#647990;fontColor=#30445b;exitX=1;exitY=0.5;exitPerimeter=0;entryX=0.01;entryY=0.5;entryPerimeter=0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1157.94" y="860.42" />
+              <mxPoint x="1174.37" y="860.42" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-7" source="device_product" target="BI" edge="1" parent="1" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#647990;fontColor=#30445b;exitX=0.67;exitY=0;exitPerimeter=0;entryX=0.02;entryY=1;entryPerimeter=0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1121.94" y="941.57" />
+              <mxPoint x="1174.45" y="905.14" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-11" source="register_staff" target="CLINIC" edge="1" parent="1" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#647990;fontColor=#30445b;dashed=1;exitX=1;exitY=0.47;exitPerimeter=0;entryX=0;entryY=0.53;entryPerimeter=0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="297.96" y="211.81" />
+              <mxPoint x="424.52" y="208.98" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-12" source="clinicians" target="EHR" edge="1" parent="1" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#647990;fontColor=#30445b;dashed=1;exitX=1;exitY=0.49;exitPerimeter=0;entryX=0;entryY=0.53;entryPerimeter=0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="252.75" y="341.07" />
+              <mxPoint x="363.9" y="339.51" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-13" source="billing_staff" target="BILL" edge="1" parent="1" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#647990;fontColor=#30445b;dashed=1;exitX=1;exitY=0.5;exitPerimeter=0;entryX=0;entryY=0.5;entryPerimeter=0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="298.5" y="467.48" />
+              <mxPoint x="378.05" y="467.48" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-14" source="bank_clients" target="LOAN" edge="1" parent="1" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#647990;fontColor=#30445b;dashed=1;exitX=1;exitY=0.51;exitPerimeter=0;entryX=0;entryY=0.49;entryPerimeter=0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="311.39" y="727.2" />
+              <mxPoint x="425.64" y="728.15" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-15" source="bank_clients" target="PAY" edge="1" parent="1" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#647990;fontColor=#30445b;dashed=1;exitX=1;exitY=0.02;exitPerimeter=0;entryX=0.03;entryY=1;entryPerimeter=0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="306.36" y="680.86" />
+              <mxPoint x="410.64" y="649.38" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-16" source="pharma_partner" target="PHARMA" edge="1" parent="1" value="OHS · ACL домена" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#647990;fontColor=#30445b;dashed=1;exitX=1;exitY=0.51;exitPerimeter=0;entryX=0;entryY=0.49;entryPerimeter=0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="308" y="858.14" />
+              <mxPoint x="415.49" y="859.05" />
+            </Array>
+            <mxPoint as="offset" x="4.51" y="-7.51" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-17" source="device_partner" target="DEVICE" edge="1" parent="1" value="OHS · ACL домена" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#647990;fontColor=#30445b;dashed=1;exitX=1;exitY=0.52;exitPerimeter=0;entryX=0;entryY=0.48;entryPerimeter=0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="318.57" y="989.22" />
+              <mxPoint x="387.92" y="989.8" />
+            </Array>
+            <mxPoint as="offset" x="12.77" y="-7.44" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-18" source="hq" target="KPI" edge="1" parent="1" value="" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#647990;fontColor=#30445b;dashed=1;exitX=1;exitY=0.53;exitPerimeter=0;entryX=0;entryY=0.46;entryPerimeter=0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="287.67" y="1117.49" />
+              <mxPoint x="377.42" y="1118.99" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-19" source="legacy" target="BILL" edge="1" parent="1" value="временный ACL" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#647990;fontColor=#30445b;dashed=1;exitX=0.81;exitY=0;exitPerimeter=0;entryX=0.16;entryY=1;entryPerimeter=0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="310.3" y="548.69" />
+              <mxPoint x="412.25" y="517.91" />
+            </Array>
+            <mxPoint as="offset" x="5.33" y="-25.91" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-20" source="BI" target="bi_users" edge="1" parent="1" value="доступ по роли" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#647990;fontColor=#30445b;dashed=1;exitX=0.99;exitY=0.5;exitPerimeter=0;entryX=0;entryY=0.5;entryPerimeter=0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1383.61" y="860.42" />
+              <mxPoint x="1433.89" y="860.42" />
+            </Array>
+            <mxPoint as="offset" x="0.74" y="-7.08" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-21" source="BILL" target="PAY" edge="1" parent="1" value="InvoiceIssued" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#647990;fontColor=#30445b;exitX=1;exitY=0.5;exitPerimeter=0;entryX=1;entryY=0.5;entryPerimeter=0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="703.6" y="491.91" />
+              <mxPoint x="684.58" y="556.94" />
+            </Array>
+            <mxPoint as="offset" x="2.11" y="11.53" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-22" source="PAY" target="BILL" edge="1" parent="1" value="PaymentPosted&#10;RefundPosted" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#647990;fontColor=#30445b;exitX=0;exitY=0.5;exitPerimeter=0;entryX=0;entryY=0.5;entryPerimeter=0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="441.93" y="547.13" />
+              <mxPoint x="441.93" y="518.81" />
+              <mxPoint x="448.52" y="495.63" />
+            </Array>
+            <mxPoint as="offset" x="50.58" y="-8.19" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-23" source="BILL" target="finance_product" edge="1" parent="1" value="InvoiceIssued · InvoiceSettled" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#3f8060;fontColor=#30445b;exitX=0.76;exitY=1;exitPerimeter=0;entryX=0.25;entryY=0;entryPerimeter=0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="740.16" y="531.54" />
+              <mxPoint x="916.75" y="603.18" />
+              <mxPoint x="928.35" y="643.3" />
+              <mxPoint x="969.95" y="673.45" />
+            </Array>
+            <mxPoint as="offset" x="15.2" y="-60.11" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-24" source="PAY" target="finance_product" edge="1" parent="1" value="PaymentPosted&#10;RefundPosted" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#3f8060;fontColor=#30445b;exitX=1;exitY=1;exitPerimeter=0;entryX=0;entryY=0.09;entryPerimeter=0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="755.71" y="647.34" />
+              <mxPoint x="882.89" y="683.16" />
+            </Array>
+            <mxPoint as="offset" x="-2.74" y="-39.85" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-25" source="AI" target="ai_product" edge="1" parent="1" value="AIUsageRecorded" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#3f8060;fontColor=#30445b;exitX=0.5;exitY=1;exitPerimeter=0;entryX=0.5;entryY=0;entryPerimeter=0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1048.63" y="374.73" />
+              <mxPoint x="1048.63" y="502.5" />
+            </Array>
+            <mxPoint as="offset" x="-13.05" y="0.04" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-26" source="PHARMA" target="pharma_product" edge="1" parent="1" value="BatchDelivered" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#3f8060;fontColor=#30445b;exitX=1;exitY=0.5;exitPerimeter=0;entryX=0;entryY=0.5;entryPerimeter=0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="736.6" y="860.42" />
+              <mxPoint x="857.04" y="860.42" />
+            </Array>
+            <mxPoint as="offset" x="14" y="-7.08" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-27" source="DEVICE" target="device_product" edge="1" parent="1" value="DeviceStatusChanged" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#3f8060;fontColor=#30445b;exitX=1;exitY=0.5;exitPerimeter=0;entryX=0;entryY=0.5;entryPerimeter=0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="771.75" y="991.4" />
+              <mxPoint x="858.36" y="991.4" />
+            </Array>
+            <mxPoint as="offset" x="0.14" y="-7.08" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rel-28" source="KPI" target="BI" edge="1" parent="1" value="KpiDefinitionPublished" style="html=0;fontFamily=Arial;fontColor=#172539;endArrow=block;endFill=1;endSize=7;rounded=0;strokeWidth=1.3;fontSize=12;labelBackgroundColor=#ffffff;strokeColor=#3f8060;fontColor=#30445b;exitX=1;exitY=0.2;exitPerimeter=0;entryX=0.39;entryY=1;entryPerimeter=0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="866.65" y="1086.78" />
+              <mxPoint x="1157.32" y="1050.4" />
+              <mxPoint x="1218.58" y="948.42" />
+            </Array>
+            <mxPoint as="offset" x="25.08" y="-23.82" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
