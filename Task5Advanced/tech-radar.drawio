@@ -1,0 +1,311 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" compressed="false">
+  <diagram id="tech-radar" name="Технологический радар">
+    <mxGraphModel grid="1" gridSize="10" guides="1" connect="1" page="0" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Технологический радар «Будущего 2.0»" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=37;fontColor=#142942;fontStyle=1;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="32.00" y="25.00" width="1460" height="55" />
+        </mxCell>
+        <mxCell id="subtitle" value="Текущие статусы технологий и архитектурных практик перед началом программы" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=19;fontColor=#4A6078;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="32.00" y="85.00" width="1460" height="29" />
+        </mxCell>
+        <mxCell id="ring-Hold" value="" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#f0f2f5;strokeColor=#A6B7CD;strokeWidth=1.2;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="81.00" y="160.00" width="588" height="588" />
+        </mxCell>
+        <mxCell id="ring-Assess" value="" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#eef4fc;strokeColor=#A6B7CD;strokeWidth=1.2;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="154.00" y="233.00" width="442" height="442" />
+        </mxCell>
+        <mxCell id="ring-Trial" value="" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#edf7f7;strokeColor=#A6B7CD;strokeWidth=1.2;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="227.00" y="306.00" width="296" height="296" />
+        </mxCell>
+        <mxCell id="ring-Adopt" value="" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#e9f5eb;strokeColor=#A6B7CD;strokeWidth=1.2;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="301.00" y="380.00" width="148" height="148" />
+        </mxCell>
+        <mxCell id="horizontal-axis" style="endArrow=none;startArrow=none;strokeColor=#92A3B9;strokeWidth=1.5;" edge="1" parent="1">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="81" y="454" />
+            <mxPoint as="targetPoint" x="669" y="454" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vertical-axis" style="endArrow=none;startArrow=none;strokeColor=#92A3B9;strokeWidth=1.5;" edge="1" parent="1">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="375" y="160" />
+            <mxPoint as="targetPoint" x="375" y="748" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="quadrant-practices" value="Практики" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=19;fontColor=#17665A;fontStyle=1;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="82.00" y="126.00" width="220" height="27" />
+        </mxCell>
+        <mxCell id="quadrant-platforms" value="Платформы" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=19;fontColor=#245885;fontStyle=1;align=right;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="452.00" y="126.00" width="220" height="27" />
+        </mxCell>
+        <mxCell id="quadrant-languages" value="Языки, форматы и фреймворки" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=19;fontColor=#734978;fontStyle=1;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="82.00" y="754.00" width="323" height="28" />
+        </mxCell>
+        <mxCell id="quadrant-tools" value="Инструменты" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=19;fontColor=#9A572C;fontStyle=1;align=right;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="452.00" y="754.00" width="220" height="28" />
+        </mxCell>
+        <mxCell id="ring-legend" value="Кольца от центра к краю" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=18;fontColor=#142942;fontStyle=1;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="755.00" y="125.00" width="740" height="24" />
+        </mxCell>
+        <mxCell id="ring-key-Adopt" value="Adopt" style="html=0;fontFamily=Arial;fontColor=#142942;rounded=1;arcSize=15;fillColor=#e9f5eb;strokeColor=#A6B7CD;align=center;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="755.00" y="155.00" width="162" height="26" />
+        </mxCell>
+        <mxCell id="ring-key-Trial" value="Trial" style="html=0;fontFamily=Arial;fontColor=#142942;rounded=1;arcSize=15;fillColor=#edf7f7;strokeColor=#A6B7CD;align=center;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="940.00" y="155.00" width="162" height="26" />
+        </mxCell>
+        <mxCell id="ring-key-Assess" value="Assess" style="html=0;fontFamily=Arial;fontColor=#142942;rounded=1;arcSize=15;fillColor=#eef4fc;strokeColor=#A6B7CD;align=center;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1125.00" y="155.00" width="162" height="26" />
+        </mxCell>
+        <mxCell id="ring-key-Hold" value="Hold" style="html=0;fontFamily=Arial;fontColor=#142942;rounded=1;arcSize=15;fillColor=#f0f2f5;strokeColor=#A6B7CD;align=center;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1310.00" y="155.00" width="162" height="26" />
+        </mxCell>
+        <mxCell id="legend-card-0" value="" style="html=0;fontFamily=Arial;fontColor=#142942;rounded=1;arcSize=9;fillColor=#F8FAFC;strokeColor=#D8E2EE;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="755.00" y="193.00" width="377" height="251" />
+        </mxCell>
+        <mxCell id="legend-title-0" value="Практики" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=17;fontColor=#17665A;fontStyle=1;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="769.00" y="201.00" width="353" height="26" />
+        </mxCell>
+        <mxCell id="legend-dot-1" value="1" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#17665A;strokeColor=#ffffff;strokeWidth=1.2;fontSize=11;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="770.00" y="242.00" width="22" height="22" />
+        </mxCell>
+        <mxCell id="legend-entry-1" value="Data Mesh и федеративное управление" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=14;fontColor=#142942;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="799.00" y="236.00" width="325" height="35" />
+        </mxCell>
+        <mxCell id="legend-dot-2" value="2" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#17665A;strokeColor=#ffffff;strokeWidth=1.2;fontSize=11;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="770.00" y="282.00" width="22" height="22" />
+        </mxCell>
+        <mxCell id="legend-entry-2" value="DDD, Event Storming и событийная&#10;интеграция" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=14;fontColor=#142942;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="799.00" y="276.00" width="325" height="35" />
+        </mxCell>
+        <mxCell id="legend-dot-3" value="3" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#17665A;strokeColor=#ffffff;strokeWidth=1.2;fontSize=11;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="770.00" y="322.00" width="22" height="22" />
+        </mxCell>
+        <mxCell id="legend-entry-3" value="Transactional outbox, идемпотентные&#10;проекции и replay" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=14;fontColor=#142942;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="799.00" y="316.00" width="325" height="35" />
+        </mxCell>
+        <mxCell id="legend-dot-4" value="4" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#17665A;strokeColor=#ffffff;strokeWidth=1.2;fontSize=11;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="770.00" y="362.00" width="22" height="22" />
+        </mxCell>
+        <mxCell id="legend-entry-4" value="CDC и антикоррупционный слой для легаси" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=14;fontColor=#142942;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="799.00" y="356.00" width="325" height="35" />
+        </mxCell>
+        <mxCell id="legend-dot-5" value="5" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#17665A;strokeColor=#ffffff;strokeWidth=1.2;fontSize=11;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="770.00" y="402.00" width="22" height="22" />
+        </mxCell>
+        <mxCell id="legend-entry-5" value="Самообслуживание BI" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=14;fontColor=#142942;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="799.00" y="396.00" width="325" height="35" />
+        </mxCell>
+        <mxCell id="blip-1-Assess" value="1" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#17665A;strokeColor=#ffffff;strokeWidth=1.2;fontSize=14;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="181.23" y="398.50" width="28" height="28" />
+        </mxCell>
+        <mxCell id="blip-2-Assess" value="2" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#17665A;strokeColor=#ffffff;strokeWidth=1.2;fontSize=14;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="199.63" y="350.55" width="28" height="28" />
+        </mxCell>
+        <mxCell id="blip-3-Assess" value="3" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#17665A;strokeColor=#ffffff;strokeWidth=1.2;fontSize=14;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="230.54" y="309.54" width="28" height="28" />
+        </mxCell>
+        <mxCell id="blip-4-Assess" value="4" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#17665A;strokeColor=#ffffff;strokeWidth=1.2;fontSize=14;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="271.55" y="278.63" width="28" height="28" />
+        </mxCell>
+        <mxCell id="blip-5-Assess" value="5" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#17665A;strokeColor=#ffffff;strokeWidth=1.2;fontSize=14;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="319.50" y="260.23" width="28" height="28" />
+        </mxCell>
+        <mxCell id="legend-card-1" value="" style="html=0;fontFamily=Arial;fontColor=#142942;rounded=1;arcSize=9;fillColor=#F8FAFC;strokeColor=#D8E2EE;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1153.00" y="193.00" width="377" height="291" />
+        </mxCell>
+        <mxCell id="legend-title-1" value="Платформы" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=17;fontColor=#245885;fontStyle=1;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1167.00" y="201.00" width="353" height="26" />
+        </mxCell>
+        <mxCell id="legend-dot-6" value="6" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#245885;strokeColor=#ffffff;strokeWidth=1.2;fontSize=11;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1168.00" y="242.00" width="22" height="22" />
+        </mxCell>
+        <mxCell id="legend-entry-6" value="SQL Server 2008 и общий DWH" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=14;fontColor=#142942;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1197.00" y="236.00" width="325" height="35" />
+        </mxCell>
+        <mxCell id="legend-dot-7" value="7" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#245885;strokeColor=#ffffff;strokeWidth=1.2;fontSize=11;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1168.00" y="282.00" width="22" height="22" />
+        </mxCell>
+        <mxCell id="legend-entry-7" value="Региональный Apache Kafka" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=14;fontColor=#142942;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1197.00" y="276.00" width="325" height="35" />
+        </mxCell>
+        <mxCell id="legend-dot-8" value="8" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#245885;strokeColor=#ffffff;strokeWidth=1.2;fontSize=11;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1168.00" y="322.00" width="22" height="22" />
+        </mxCell>
+        <mxCell id="legend-entry-8" value="Apache Flink" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=14;fontColor=#142942;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1197.00" y="316.00" width="325" height="35" />
+        </mxCell>
+        <mxCell id="legend-dot-9" value="9" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#245885;strokeColor=#ffffff;strokeWidth=1.2;fontSize=11;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1168.00" y="362.00" width="22" height="22" />
+        </mxCell>
+        <mxCell id="legend-entry-9" value="Региональная облачная площадка и Yandex&#10;Cloud" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=14;fontColor=#142942;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1197.00" y="356.00" width="325" height="35" />
+        </mxCell>
+        <mxCell id="legend-dot-10" value="10" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#245885;strokeColor=#ffffff;strokeWidth=1.2;fontSize=11;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1168.00" y="402.00" width="22" height="22" />
+        </mxCell>
+        <mxCell id="legend-entry-10" value="S3-совместимое объектное хранилище" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=14;fontColor=#142942;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1197.00" y="396.00" width="325" height="35" />
+        </mxCell>
+        <mxCell id="legend-dot-11" value="11" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#245885;strokeColor=#ffffff;strokeWidth=1.2;fontSize=11;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1168.00" y="442.00" width="22" height="22" />
+        </mxCell>
+        <mxCell id="legend-entry-11" value="Trino" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=14;fontColor=#142942;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1197.00" y="436.00" width="325" height="35" />
+        </mxCell>
+        <mxCell id="blip-10-Trial" value="10" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#245885;strokeColor=#ffffff;strokeWidth=1.2;fontSize=14;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="439.49" y="361.51" width="28" height="28" />
+        </mxCell>
+        <mxCell id="blip-7-Assess" value="7" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#245885;strokeColor=#ffffff;strokeWidth=1.2;fontSize=14;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="540.77" y="398.50" width="28" height="28" />
+        </mxCell>
+        <mxCell id="blip-8-Assess" value="8" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#245885;strokeColor=#ffffff;strokeWidth=1.2;fontSize=14;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="513.35" y="335.94" width="28" height="28" />
+        </mxCell>
+        <mxCell id="blip-9-Assess" value="9" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#245885;strokeColor=#ffffff;strokeWidth=1.2;fontSize=14;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="465.06" y="287.65" width="28" height="28" />
+        </mxCell>
+        <mxCell id="blip-11-Assess" value="11" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#245885;strokeColor=#ffffff;strokeWidth=1.2;fontSize=14;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="402.50" y="260.23" width="28" height="28" />
+        </mxCell>
+        <mxCell id="blip-6-Hold" value="6" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#245885;strokeColor=#ffffff;strokeWidth=1.2;fontSize=14;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="543.08" y="257.92" width="28" height="28" />
+        </mxCell>
+        <mxCell id="legend-card-2" value="" style="html=0;fontFamily=Arial;fontColor=#142942;rounded=1;arcSize=9;fillColor=#F8FAFC;strokeColor=#D8E2EE;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="755.00" y="495.00" width="377" height="251" />
+        </mxCell>
+        <mxCell id="legend-title-2" value="Языки, форматы и фреймворки" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=17;fontColor=#734978;fontStyle=1;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="769.00" y="503.00" width="353" height="26" />
+        </mxCell>
+        <mxCell id="legend-dot-20" value="20" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#734978;strokeColor=#ffffff;strokeWidth=1.2;fontSize=11;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="770.00" y="544.00" width="22" height="22" />
+        </mxCell>
+        <mxCell id="legend-entry-20" value="Go и Java" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=14;fontColor=#142942;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="799.00" y="538.00" width="325" height="35" />
+        </mxCell>
+        <mxCell id="legend-dot-21" value="21" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#734978;strokeColor=#ffffff;strokeWidth=1.2;fontSize=11;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="770.00" y="584.00" width="22" height="22" />
+        </mxCell>
+        <mxCell id="legend-entry-21" value="Python" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=14;fontColor=#142942;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="799.00" y="578.00" width="325" height="35" />
+        </mxCell>
+        <mxCell id="legend-dot-22" value="22" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#734978;strokeColor=#ffffff;strokeWidth=1.2;fontSize=11;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="770.00" y="624.00" width="22" height="22" />
+        </mxCell>
+        <mxCell id="legend-entry-22" value="PowerBuilder" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=14;fontColor=#142942;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="799.00" y="618.00" width="325" height="35" />
+        </mxCell>
+        <mxCell id="legend-dot-23" value="23" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#734978;strokeColor=#ffffff;strokeWidth=1.2;fontSize=11;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="770.00" y="664.00" width="22" height="22" />
+        </mxCell>
+        <mxCell id="legend-entry-23" value="Apache Camel" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=14;fontColor=#142942;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="799.00" y="658.00" width="325" height="35" />
+        </mxCell>
+        <mxCell id="legend-dot-24" value="24" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#734978;strokeColor=#ffffff;strokeWidth=1.2;fontSize=11;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="770.00" y="704.00" width="22" height="22" />
+        </mxCell>
+        <mxCell id="legend-entry-24" value="Apache Iceberg" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=14;fontColor=#142942;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="799.00" y="698.00" width="325" height="35" />
+        </mxCell>
+        <mxCell id="blip-20-Adopt" value="20" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#734978;strokeColor=#ffffff;strokeWidth=1.2;fontSize=14;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="310.26" y="458.47" width="28" height="28" />
+        </mxCell>
+        <mxCell id="blip-21-Adopt" value="21" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#734978;strokeColor=#ffffff;strokeWidth=1.2;fontSize=14;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="342.53" y="490.74" width="28" height="28" />
+        </mxCell>
+        <mxCell id="blip-24-Assess" value="24" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#734978;strokeColor=#ffffff;strokeWidth=1.2;fontSize=14;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="230.54" y="570.46" width="28" height="28" />
+        </mxCell>
+        <mxCell id="blip-22-Hold" value="22" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#734978;strokeColor=#ffffff;strokeWidth=1.2;fontSize=14;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="110.10" y="497.92" width="28" height="28" />
+        </mxCell>
+        <mxCell id="blip-23-Hold" value="23" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#734978;strokeColor=#ffffff;strokeWidth=1.2;fontSize=14;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="303.08" y="690.90" width="28" height="28" />
+        </mxCell>
+        <mxCell id="legend-card-3" value="" style="html=0;fontFamily=Arial;fontColor=#142942;rounded=1;arcSize=9;fillColor=#F8FAFC;strokeColor=#D8E2EE;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1153.00" y="495.00" width="377" height="371" />
+        </mxCell>
+        <mxCell id="legend-title-3" value="Инструменты" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=17;fontColor=#9A572C;fontStyle=1;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1167.00" y="503.00" width="353" height="26" />
+        </mxCell>
+        <mxCell id="legend-dot-12" value="12" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#9A572C;strokeColor=#ffffff;strokeWidth=1.2;fontSize=11;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1168.00" y="544.00" width="22" height="22" />
+        </mxCell>
+        <mxCell id="legend-entry-12" value="Кастомный Power BI" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=14;fontColor=#142942;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1197.00" y="538.00" width="325" height="35" />
+        </mxCell>
+        <mxCell id="legend-dot-13" value="13" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#9A572C;strokeColor=#ffffff;strokeWidth=1.2;fontSize=11;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1168.00" y="584.00" width="22" height="22" />
+        </mxCell>
+        <mxCell id="legend-entry-13" value="Terraform и GitHub Actions" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=14;fontColor=#142942;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1197.00" y="578.00" width="325" height="35" />
+        </mxCell>
+        <mxCell id="legend-dot-14" value="14" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#9A572C;strokeColor=#ffffff;strokeWidth=1.2;fontSize=11;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1168.00" y="624.00" width="22" height="22" />
+        </mxCell>
+        <mxCell id="legend-entry-14" value="Docker Compose и MinIO" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=14;fontColor=#142942;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1197.00" y="618.00" width="325" height="35" />
+        </mxCell>
+        <mxCell id="legend-dot-15" value="15" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#9A572C;strokeColor=#ffffff;strokeWidth=1.2;fontSize=11;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1168.00" y="664.00" width="22" height="22" />
+        </mxCell>
+        <mxCell id="legend-entry-15" value="Schema Registry" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=14;fontColor=#142942;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1197.00" y="658.00" width="325" height="35" />
+        </mxCell>
+        <mxCell id="legend-dot-16" value="16" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#9A572C;strokeColor=#ffffff;strokeWidth=1.2;fontSize=11;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1168.00" y="704.00" width="22" height="22" />
+        </mxCell>
+        <mxCell id="legend-entry-16" value="Project Nessie" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=14;fontColor=#142942;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1197.00" y="698.00" width="325" height="35" />
+        </mxCell>
+        <mxCell id="legend-dot-17" value="17" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#9A572C;strokeColor=#ffffff;strokeWidth=1.2;fontSize=11;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1168.00" y="744.00" width="22" height="22" />
+        </mxCell>
+        <mxCell id="legend-entry-17" value="DataHub" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=14;fontColor=#142942;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1197.00" y="738.00" width="325" height="35" />
+        </mxCell>
+        <mxCell id="legend-dot-18" value="18" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#9A572C;strokeColor=#ffffff;strokeWidth=1.2;fontSize=11;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1168.00" y="784.00" width="22" height="22" />
+        </mxCell>
+        <mxCell id="legend-entry-18" value="Apache Superset для BI-портала,&#10;корпоративный IdP и аудит" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=14;fontColor=#142942;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1197.00" y="778.00" width="325" height="35" />
+        </mxCell>
+        <mxCell id="legend-dot-19" value="19" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#9A572C;strokeColor=#ffffff;strokeWidth=1.2;fontSize=11;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1168.00" y="824.00" width="22" height="22" />
+        </mxCell>
+        <mxCell id="legend-entry-19" value="Наблюдение за потоками" style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=14;fontColor=#142942;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="1197.00" y="818.00" width="325" height="35" />
+        </mxCell>
+        <mxCell id="blip-14-Adopt" value="14" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#9A572C;strokeColor=#ffffff;strokeWidth=1.2;fontSize=14;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="387.16" y="466.16" width="28" height="28" />
+        </mxCell>
+        <mxCell id="blip-13-Trial" value="13" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#9A572C;strokeColor=#ffffff;strokeWidth=1.2;fontSize=14;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="439.49" y="518.49" width="28" height="28" />
+        </mxCell>
+        <mxCell id="blip-15-Assess" value="15" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#9A572C;strokeColor=#ffffff;strokeWidth=1.2;fontSize=14;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="540.77" y="481.50" width="28" height="28" />
+        </mxCell>
+        <mxCell id="blip-16-Assess" value="16" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#9A572C;strokeColor=#ffffff;strokeWidth=1.2;fontSize=14;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="522.37" y="529.45" width="28" height="28" />
+        </mxCell>
+        <mxCell id="blip-17-Assess" value="17" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#9A572C;strokeColor=#ffffff;strokeWidth=1.2;fontSize=14;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="491.46" y="570.46" width="28" height="28" />
+        </mxCell>
+        <mxCell id="blip-18-Assess" value="18" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#9A572C;strokeColor=#ffffff;strokeWidth=1.2;fontSize=14;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="450.45" y="601.37" width="28" height="28" />
+        </mxCell>
+        <mxCell id="blip-19-Assess" value="19" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#9A572C;strokeColor=#ffffff;strokeWidth=1.2;fontSize=14;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="402.50" y="619.77" width="28" height="28" />
+        </mxCell>
+        <mxCell id="blip-12-Hold" value="12" style="html=0;fontFamily=Arial;fontColor=#142942;ellipse;aspect=fixed;fillColor=#9A572C;strokeColor=#ffffff;strokeWidth=1.2;fontSize=14;fontStyle=1;fontColor=#ffffff;align=center;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="543.08" y="622.08" width="28" height="28" />
+        </mxCell>
+        <mxCell id="lookup" value="Номер точки соответствует позиции в перечне справа." style="html=0;fontFamily=Arial;fontColor=#142942;text;strokeColor=none;fillColor=none;fontSize=15;fontColor=#4A6078;fontStyle=0;align=left;verticalAlign=middle;spacing=0;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="82.00" y="792.00" width="600" height="30" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
