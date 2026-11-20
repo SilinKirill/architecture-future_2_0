@@ -4,7 +4,7 @@
 
 ## Как проверить без облака
 
-Из папки `Task2Advanced` выполните `docker compose run --rm -T check`. Проверка в MinIO должна закончиться строкой `PASS`. Она подтверждает, что два клиента читают одно состояние и конкурентный запуск получает ошибку блокировки. По завершении удалите локальный стенд командой `docker compose down -v`. [Подробности теста](local-check.md)
+Из корня репозитория выполните `docker compose -f Task2Advanced/compose.yaml run --rm -T check`. Проверка в MinIO должна закончиться строкой `PASS`. Она подтверждает, что два клиента читают одно состояние и конкурентный запуск получает ошибку блокировки. По завершении удалите локальный стенд командой `docker compose -f Task2Advanced/compose.yaml down -v`. [Подробности теста](local-check.md)
 
 На pull request [workflow Task 2 Terraform](../.github/workflows/task2-terraform.yml) запускает тесты модуля Task1, проверку формата Terraform и тест с MinIO. Облачное задание запускается вручную.
 
@@ -12,57 +12,97 @@
 
 1. Используйте каталог и подсеть, проверенные в [Task1](../Task1Advanced/README.md#ручная-проверка-dev-в-yandex-cloud). К этому моменту завершите удаление тестовой ВМ Task1 и её дисков.
 2. В консоли облака откройте **Object Storage → Бакеты → Создать бакет**. Выберите уникальное имя, оставьте публичный доступ закрытым и включите версионирование. Блокировку версий объектов оставьте выключенной, чтобы Terraform мог удалять временный `.tflock`. [Создание бакета](https://yandex.cloud/ru/docs/storage/operations/buckets/create) · [Версионирование](https://yandex.cloud/ru/docs/storage/operations/buckets/versioning)
-3. Создайте сервисный аккаунт для среды `dev` и назначьте ему `storage.editor` на этот бакет. Выпустите статический ключ доступа. Для ручной проверки этим ключом Terraform работает с бакетом, а IAM-токен пользователя из Task1 даёт доступ к Compute Cloud. [Права на бакет](https://yandex.cloud/ru/docs/storage/security/) · [Статический ключ](https://yandex.cloud/ru/docs/iam/operations/authentication/manage-access-keys)
+3. Создайте сервисный аккаунт для среды `dev` и назначьте ему `storage.editor` на этот бакет. Выпустите статический ключ доступа. Для ручной проверки этим ключом Terraform работает с бакетом, а IAM-токен пользователя из Task1 даёт доступ к Compute Cloud. [Права на бакет](https://yandex.cloud/ru/docs/storage/operations/buckets/iam-access) · [Статический ключ](https://yandex.cloud/ru/docs/iam/operations/authentication/manage-access-keys)
 
 ## Ручная проверка в Yandex Cloud до слияния
 
-Из `Task2Advanced` в PowerShell укажите имя бакета, ID и зону подсети из Task1. Если ключ SSH создан с другим именем, укажите путь к соответствующему файлу `.pub`. [Авторизация провайдера Terraform](https://yandex.cloud/ru/docs/terraform/authentication)
+Откройте Bash в любой папке репозитория. На Windows подойдёт Git Bash. Первый блок сам перейдёт в корень. Выполняйте блоки по порядку в той же вкладке. При готовом файле параметров Task1 команды можно копировать целиком. На шаге 1 терминал запросит имя бакета и пару ключей.
 
-```powershell
-$env:YC_TOKEN = yc iam create-token
-$env:TF_VAR_cloud_id = yc config get cloud-id
-$env:TF_VAR_folder_id = yc config get folder-id
-$env:TF_VAR_subnet_id = '<ID подсети>'
-$env:TF_VAR_ssh_public_key = (Get-Content -Raw "$env:USERPROFILE/.ssh/id_ed25519.pub").Trim()
-$zone = '<зона подсети>'
-$bucket = '<имя бакета dev>'
-$env:AWS_ACCESS_KEY_ID = Read-Host 'ID статического ключа'
-$env:AWS_SECRET_ACCESS_KEY = [System.Net.NetworkCredential]::new('', (Read-Host 'Секретная часть ключа' -AsSecureString)).Password
+Начните с проверки Yandex Cloud CLI. Если в корне репозитория есть распакованный `.local/yandex-cli/yc.exe`, блок добавит его папку в `PATH` этой вкладки. [Установка CLI для Windows, Linux и macOS](https://yandex.cloud/ru/docs/cli/operations/install-cli)
+
+```bash
+cd "$(git rev-parse --show-toplevel)"
+if ! command -v yc >/dev/null 2>&1 && [[ -f .local/yandex-cli/yc.exe ]]; then
+    export PATH="$(pwd)/.local/yandex-cli:$PATH"
+fi
+yc --version
 ```
 
-1. Инициализируйте S3-бэкенд и изучите план. При пустом состоянии ожидаются два создаваемых ресурса. Системный диск входит в ресурс ВМ.
+Если `yc --version` не сработала, установите CLI по ссылке выше, откройте новую вкладку Bash и повторите блок. При первом запуске выполните `yc init` и выберите каталог, где создали бакет. Затем продолжайте в этой же вкладке.
 
-   ```powershell
-   docker compose run --rm terraform init -input=false -lockfile=readonly -reconfigure "-backend-config=bucket=$bucket" "-backend-config=key=task2advanced/dev/terraform.tfstate"
-   docker compose run --rm terraform plan -input=false -lock-timeout=2m '-var-file=../../Task1Advanced/envs/dev/terraform.tfvars' -var=name=task2-dev "-var=zone=$zone" '-out=dev.tfplan'
-   docker compose run --rm terraform show dev.tfplan
+1. Инициализируйте S3-бэкенд. Скопируйте весь блок вместе с фигурными скобками. Введите по очереди имя бакета, идентификатор и секрет статического ключа, нажимая Enter после каждого значения. Символы секрета скрыты. При успехе Terraform выведет `Successfully configured the backend "s3"`.
+
+   ```bash
+   {
+     if read -r -p 'Имя бакета: ' bucket &&
+        read -r -p 'Идентификатор ключа: ' AWS_ACCESS_KEY_ID &&
+        read -r -s -p 'Секретный ключ: ' AWS_SECRET_ACCESS_KEY &&
+        [[ -n "$bucket" && -n "$AWS_ACCESS_KEY_ID" && -n "$AWS_SECRET_ACCESS_KEY" ]]; then
+       printf '\n'
+       export AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY
+       docker compose -f Task2Advanced/compose.yaml run --rm -T terraform init -input=false -lockfile=readonly -reconfigure \
+         "-backend-config=bucket=$bucket" \
+         '-backend-config=key=task2advanced/dev/terraform.tfstate'
+     else
+       printf '\nЗаполните все три поля и повторите блок.\n'
+     fi
+   }
    ```
 
-2. После проверки примените план. В Compute Cloud найдите ВМ `task2-dev` и оба диска, а в Object Storage — объект `task2advanced/dev/terraform.tfstate`.
+2. Подготовьте доступ к Compute Cloud. Task2 возьмёт ID подсети, зону и публичный ключ из `Task1Advanced/envs/dev/cloud.local.tfvars`. Если файла ещё нет, создайте его по шагу 3 в README Task1. Затем выполните блок ниже в той же вкладке. [Подготовка параметров в Task1](../Task1Advanced/README.md#ручная-проверка-dev-в-yandex-cloud) · [Авторизация провайдера Terraform](https://yandex.cloud/ru/docs/terraform/authentication)
 
-   ```powershell
-   docker compose run --rm terraform apply -input=false -lock-timeout=2m dev.tfplan
-   docker compose run --rm terraform output vm
+   ```bash
+   YC_TOKEN="$(yc iam create-token)" &&
+   TF_VAR_cloud_id="$(yc config get cloud-id)" &&
+   TF_VAR_folder_id="$(yc config get folder-id)" &&
+   export YC_TOKEN TF_VAR_cloud_id TF_VAR_folder_id
    ```
 
-3. Запустите новый контейнер и проверьте, что он видит в S3 ресурсы прошлого запуска. При неизменной инфраструктуре и образе повторный план завершается сообщением `No changes`.
+3. Постройте и изучите план. При пустом состоянии ожидаются два создаваемых ресурса. Системный диск входит в ресурс ВМ.
 
-   ```powershell
-   docker compose run --rm terraform state list
-   docker compose run --rm terraform plan -input=false -lock-timeout=2m '-var-file=../../Task1Advanced/envs/dev/terraform.tfvars' -var=name=task2-dev "-var=zone=$zone"
+   ```bash
+   docker compose -f Task2Advanced/compose.yaml run --rm -T terraform plan -input=false -lock-timeout=2m \
+     '-var-file=../../Task1Advanced/envs/dev/terraform.tfvars' \
+     '-var-file=../../Task1Advanced/envs/dev/cloud.local.tfvars' \
+     -var=name=task2-dev '-out=dev.tfplan' &&
+   docker compose -f Task2Advanced/compose.yaml run --rm -T terraform show dev.tfplan
    ```
 
-4. Постройте и отдельно подтвердите план удаления. Проверьте пустой `state list` и отсутствие ВМ и её дисков в Compute Cloud.
+4. После проверки плана примените его отдельным блоком. В Compute Cloud найдите ВМ `task2-dev` и оба диска, а в Object Storage — объект `task2advanced/dev/terraform.tfstate`.
 
-   ```powershell
-   docker compose run --rm terraform plan -destroy -input=false -lock-timeout=2m '-var-file=../../Task1Advanced/envs/dev/terraform.tfvars' -var=name=task2-dev "-var=zone=$zone" '-out=dev-destroy.tfplan'
-   docker compose run --rm terraform show dev-destroy.tfplan
-   # После проверки плана
-   docker compose run --rm terraform apply -input=false -lock-timeout=2m dev-destroy.tfplan
-   docker compose run --rm terraform state list
+   ```bash
+   docker compose -f Task2Advanced/compose.yaml run --rm -T terraform apply -input=false -lock-timeout=2m dev.tfplan &&
+   docker compose -f Task2Advanced/compose.yaml run --rm -T terraform output vm
    ```
 
-Состояние с пустым списком ресурсов и его история остаются в бакете. Если бакет создан только для одноразовой проверки и CI запускать не планируется, его можно удалить вместе с версиями объекта. После работы удалите локальные файлы `.tfplan` и закройте сессию PowerShell с ключами.
+5. Запустите новый контейнер и проверьте, что он видит в S3 ресурсы прошлого запуска. При неизменной инфраструктуре и образе повторный план завершается сообщением `No changes`.
+
+   ```bash
+   docker compose -f Task2Advanced/compose.yaml run --rm -T terraform state list &&
+   docker compose -f Task2Advanced/compose.yaml run --rm -T terraform plan -input=false -lock-timeout=2m \
+     '-var-file=../../Task1Advanced/envs/dev/terraform.tfvars' \
+     '-var-file=../../Task1Advanced/envs/dev/cloud.local.tfvars' \
+     -var=name=task2-dev
+   ```
+
+6. Постройте и изучите план удаления.
+
+   ```bash
+   docker compose -f Task2Advanced/compose.yaml run --rm -T terraform plan -destroy -input=false -lock-timeout=2m \
+     '-var-file=../../Task1Advanced/envs/dev/terraform.tfvars' \
+     '-var-file=../../Task1Advanced/envs/dev/cloud.local.tfvars' \
+     -var=name=task2-dev '-out=dev-destroy.tfplan' &&
+   docker compose -f Task2Advanced/compose.yaml run --rm -T terraform show dev-destroy.tfplan
+   ```
+
+   После проверки примените план удаления. Убедитесь, что `state list` пуст, а ВМ и оба диска исчезли из Compute Cloud.
+
+   ```bash
+   docker compose -f Task2Advanced/compose.yaml run --rm -T terraform apply -input=false -lock-timeout=2m dev-destroy.tfplan &&
+   docker compose -f Task2Advanced/compose.yaml run --rm -T terraform state list
+   ```
+
+Состояние с пустым списком ресурсов и его история остаются в бакете. Если бакет создан только для одноразовой проверки и CI запускать не планируется, его можно удалить вместе с версиями объекта. После работы удалите локальные файлы `.tfplan` из `Task2Advanced/terraform` и закройте вкладку Bash с ключами.
 
 ## Настройка и запуск GitHub Actions
 
