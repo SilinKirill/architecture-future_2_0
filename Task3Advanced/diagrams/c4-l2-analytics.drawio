@@ -1,0 +1,188 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" compressed="false">
+  <diagram id="c4-l2-analytics" name="C2 · Аналитическая платформа">
+    <mxGraphModel grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" background="#F8FAFC">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="cluster_platform" value="&lt;B&gt;Платформа данных компании&lt;/B&gt;" style="html=1;rounded=1;arcSize=4;container=1;collapsible=0;recursiveResize=0;whiteSpace=wrap;align=left;verticalAlign=top;spacingTop=4;spacingLeft=10;spacingRight=10;fontFamily=Arial;fontSize=15;fontColor=#173B64;fillColor=#FFFFFF;strokeColor=#91ABBE;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="22" y="98.25" width="1100" height="726.4" as="geometry" />
+        </mxCell>
+        <mxCell id="cluster_access" value="&lt;B&gt;Доступ к данным&lt;/B&gt;" style="html=1;rounded=1;arcSize=4;container=1;collapsible=0;recursiveResize=0;whiteSpace=wrap;align=left;verticalAlign=top;spacingTop=4;spacingLeft=10;spacingRight=10;fontFamily=Arial;fontSize=15;fontColor=#173B64;fillColor=#F5F4FB;strokeColor=#C7C8E3;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="cluster_platform">
+          <mxGeometry x="211.25" y="414.14" width="767.5" height="286.01" as="geometry" />
+        </mxCell>
+        <mxCell id="cluster_stream" value="&lt;B&gt;Региональные потоки&lt;/B&gt;" style="html=1;rounded=1;arcSize=4;container=1;collapsible=0;recursiveResize=0;whiteSpace=wrap;align=left;verticalAlign=top;spacingTop=4;spacingLeft=10;spacingRight=10;fontFamily=Arial;fontSize=15;fontColor=#173B64;fillColor=#F1F8F6;strokeColor=#A9C8BF;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="cluster_platform">
+          <mxGeometry x="26.25" y="54.06" width="1047.5" height="126.91" as="geometry" />
+        </mxCell>
+        <mxCell id="cluster_products" value="&lt;B&gt;Продукты данных&lt;/B&gt;" style="html=1;rounded=1;arcSize=4;container=1;collapsible=0;recursiveResize=0;whiteSpace=wrap;align=left;verticalAlign=top;spacingTop=4;spacingLeft=10;spacingRight=10;fontFamily=Arial;fontSize=15;fontColor=#173B64;fillColor=#F1F8F6;strokeColor=#A9C8BF;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="cluster_platform">
+          <mxGeometry x="192.5" y="227.22" width="668.75" height="140.66" as="geometry" />
+        </mxCell>
+        <mxCell id="analyst" value="&lt;B&gt;Аналитики и владельцы продуктов&lt;/B&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Роли · поиск данных, отчёты и KPI&lt;/font&gt;" style="html=1;rounded=1;arcSize=24;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=3;fontFamily=Arial;fontSize=13.75;fontColor=#10253F;fillColor=#F1F5F9;strokeColor=#94A3B8;strokeWidth=1.2;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="432.91" y="877.77" width="270.68" height="45.35" as="geometry" />
+        </mxCell>
+        <mxCell id="kpi" value="&lt;B&gt;Офис KPI&lt;/B&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Роль · методики, владельцы и версии метрик&lt;/font&gt;" style="html=1;rounded=1;arcSize=24;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=3;fontFamily=Arial;fontSize=13.75;fontColor=#10253F;fillColor=#F1F5F9;strokeColor=#94A3B8;strokeWidth=1.2;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="816.98" y="877.77" width="242.55" height="45.35" as="geometry" />
+        </mxCell>
+        <object id="kafka" label="&lt;B&gt;Шина событий&lt;/B&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Контейнер · Apache Kafka&lt;/font&gt;&lt;br&gt;Темы по домену и региону · ACL" link="c4-l2-operational.svg">
+          <mxCell style="html=1;rounded=1;arcSize=24;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=3;fontFamily=Arial;fontSize=13.75;fontColor=#10253F;fillColor=#DEF1EB;strokeColor=#6E9E91;strokeWidth=1.2;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="cluster_stream">
+            <mxGeometry x="19.51" y="47.81" width="235.99" height="59.1" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="schema" value="&lt;B&gt;Реестр схем&lt;/B&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Контейнер · Schema Registry&lt;/font&gt;&lt;br&gt;Разрешённые схемы и версии" style="html=1;rounded=1;arcSize=24;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=3;fontFamily=Arial;fontSize=13.75;fontColor=#10253F;fillColor=#DEF1EB;strokeColor=#6E9E91;strokeWidth=1.2;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="cluster_stream">
+          <mxGeometry x="807.01" y="47.81" width="220.99" height="59.1" as="geometry" />
+        </mxCell>
+        <object id="projector" label="&lt;B&gt;Проектор доменного потока&lt;/B&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Контейнер · Apache Flink&lt;/font&gt;&lt;br&gt;Валидация и построение проекций" link="c4-l3-domain-stream-projector.svg">
+          <mxCell style="html=1;rounded=1;arcSize=24;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=3;fontFamily=Arial;fontSize=13.75;fontColor=#10253F;fillColor=#CBE9DF;strokeColor=#448471;strokeWidth=1.6;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="cluster_stream">
+            <mxGeometry x="406.23" y="47.81" width="250.05" height="59.1" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="products" value="&lt;B&gt;Таблицы доменных продуктов&lt;/B&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Хранилище · S3 / Apache Iceberg&lt;/font&gt;&lt;br&gt;Клиники, ИИ, банк, фарма, медоборудование&lt;br&gt;Витрины по регионам и доменам" style="html=1;rounded=1;arcSize=24;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=3;fontFamily=Arial;fontSize=13.75;fontColor=#10253F;fillColor=#DEF1EB;strokeColor=#6E9E91;strokeWidth=1.2;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="cluster_products">
+          <mxGeometry x="19.51" y="47.81" width="318.48" height="72.85" as="geometry" />
+        </mxCell>
+        <mxCell id="nessie" value="&lt;B&gt;Технический каталог&lt;/B&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Контейнер · Project Nessie&lt;/font&gt;&lt;br&gt;Ссылки на таблицы и версии Iceberg" style="html=1;rounded=1;arcSize=24;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=3;fontFamily=Arial;fontSize=13.75;fontColor=#10253F;fillColor=#DEF1EB;strokeColor=#6E9E91;strokeWidth=1.2;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="cluster_products">
+          <mxGeometry x="385.91" y="54.69" width="263.18" height="59.1" as="geometry" />
+        </mxCell>
+        <mxCell id="trino" value="&lt;B&gt;Защищённый SQL&lt;/B&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Контейнер · Trino / Iceberg connector&lt;/font&gt;&lt;br&gt;Доступ по ролям, доменам и регионам&lt;br&gt;Фильтры строк и маскирование колонок" style="html=1;rounded=1;arcSize=24;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=3;fontFamily=Arial;fontSize=13.75;fontColor=#10253F;fillColor=#ECECF9;strokeColor=#9899C6;strokeWidth=1.2;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="cluster_access">
+          <mxGeometry x="19.51" y="47.81" width="280.99" height="72.85" as="geometry" />
+        </mxCell>
+        <mxCell id="datahub" value="&lt;B&gt;Каталог для поиска&lt;/B&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Контейнер · DataHub&lt;/font&gt;&lt;br&gt;Описание наборов, владельцы, lineage&lt;br&gt;Глоссарий KPI и условия доступа" style="html=1;rounded=1;arcSize=24;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=3;fontFamily=Arial;fontSize=13.75;fontColor=#10253F;fillColor=#ECECF9;strokeColor=#9899C6;strokeWidth=1.2;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="cluster_access">
+          <mxGeometry x="470.13" y="47.81" width="277.24" height="72.85" as="geometry" />
+        </mxCell>
+        <mxCell id="portal" value="&lt;B&gt;Портал самостоятельной BI&lt;/B&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Контейнер · веб-портал / конструктор отчётов&lt;/font&gt;&lt;br&gt;Отчёты по согласованным моделям и KPI" style="html=1;rounded=1;arcSize=24;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=3;fontFamily=Arial;fontSize=13.75;fontColor=#10253F;fillColor=#DFE0F5;strokeColor=#7779B1;strokeWidth=1.6;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="cluster_access">
+          <mxGeometry x="19.82" y="206.91" width="297.86" height="59.1" as="geometry" />
+        </mxCell>
+        <mxCell id="idp" value="&lt;B&gt;Провайдер идентификации&lt;/B&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Контейнер · корпоративный IdP&lt;/font&gt;&lt;br&gt;Вход, группы, роли" style="html=1;rounded=1;arcSize=24;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=3;fontFamily=Arial;fontSize=13.75;fontColor=#10253F;fillColor=#ECECF9;strokeColor=#9899C6;strokeWidth=1.2;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="cluster_access">
+          <mxGeometry x="426.85" y="206.91" width="216.3" height="59.1" as="geometry" />
+        </mxCell>
+        <mxCell id="note" value="Kafka, доменные продукты и BI получают разрешённые поля.&lt;br&gt;Медкарты, истории и содержимое результатов ИИ остаются в исходных контурах." style="html=1;shape=note;size=14;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=3;fontFamily=Arial;fontSize=13.75;fontColor=#713C16;fillColor=#FFF7ED;strokeColor=#C89264;strokeWidth=1.2;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="442.13" y="984.38" width="554.74" height="55.35" as="geometry" />
+        </mxCell>
+        <mxCell id="diagram-title" value="&lt;B&gt;C4 · Контейнеры · Целевая архитектура через 36 месяцев&lt;/B&gt;&lt;br&gt;&lt;font style=&quot;font-size:17.5px&quot;&gt;Доменные продукты данных и самостоятельная аналитика&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Arial;fontSize=28.75;fontColor=#10253F;strokeColor=none;fillColor=none;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="12" y="12" width="1120" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="relation-0" value="Доменные события&lt;br&gt;Kafka consumer" style="html=1;convertToSvg=1;rounded=0;startArrow=none;endArrow=block;startSize=6;endSize=6;strokeWidth=1.12;strokeColor=#52718B;fontFamily=Arial;fontSize=11.25;fontColor=#344F67;labelBackgroundColor=#F8FAFC;exitX=1;exitY=0.5;exitPerimeter=0;entryX=0;entryY=0.5;entryPerimeter=0;" edge="1" parent="1" source="kafka" target="projector">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="348.39" y="229.67" />
+              <mxPoint x="398.57" y="229.67" />
+            </Array>
+            <mxPoint x="0.12" y="-16.88" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relation-1" value="Схема по ID · REST" style="html=1;convertToSvg=1;rounded=0;startArrow=none;endArrow=block;startSize=6;endSize=6;strokeWidth=1.12;strokeColor=#697E94;fontFamily=Arial;fontSize=11.25;fontColor=#344F67;labelBackgroundColor=#F8FAFC;dashed=1;exitX=1;exitY=0.5;exitPerimeter=0;entryX=0;entryY=0.5;entryPerimeter=0;" edge="1" parent="1" source="projector" target="schema">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="750.16" y="229.67" />
+              <mxPoint x="800.38" y="229.67" />
+            </Array>
+            <mxPoint x="-0.14" y="-10.31" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relation-2" value="Запросы к витринам · SQL&lt;br&gt;С идентификацией пользователя" style="html=1;convertToSvg=1;rounded=0;startArrow=block;endArrow=none;startSize=6;endSize=6;strokeWidth=1.12;strokeColor=#6C6A9B;fontFamily=Arial;fontSize=11.25;fontColor=#344F67;labelBackgroundColor=#F8FAFC;exitX=0.51;exitY=1;exitPerimeter=0;entryX=0.49;entryY=0;entryPerimeter=0;" edge="1" parent="1" source="trino" target="portal">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="397.35" y="667.92" />
+              <mxPoint x="399.06" y="697.26" />
+            </Array>
+            <mxPoint x="87.77" y="0.03" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relation-3" value="Вход · OIDC" style="html=1;convertToSvg=1;rounded=0;startArrow=none;endArrow=block;startSize=6;endSize=6;strokeWidth=1.12;strokeColor=#6C6A9B;fontFamily=Arial;fontSize=11.25;fontColor=#344F67;labelBackgroundColor=#F8FAFC;exitX=1;exitY=0.5;exitPerimeter=0;entryX=0;entryY=0.5;entryPerimeter=0;" edge="1" parent="1" source="portal" target="idp">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="584.3" y="748.85" />
+              <mxPoint x="618.6" y="748.85" />
+            </Array>
+            <mxPoint x="-0.04" y="-10.31" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relation-4" value="Поиск наборов и KPI · API" style="html=1;convertToSvg=1;rounded=0;startArrow=block;endArrow=none;startSize=6;endSize=6;strokeWidth=1.12;strokeColor=#6C6A9B;fontFamily=Arial;fontSize=11.25;fontColor=#344F67;labelBackgroundColor=#F8FAFC;exitX=0.14;exitY=1;exitPerimeter=0;entryX=0.81;entryY=0;entryPerimeter=0;" edge="1" parent="1" source="datahub" target="portal">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="661.74" y="661.88" />
+              <mxPoint x="584.5" y="689.3" />
+              <mxPoint x="538.88" y="703.88" />
+            </Array>
+            <mxPoint x="104.41" y="-1.37" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relation-5" value="Запись разрешённых проекций&lt;br&gt;Iceberg commit / S3" style="html=1;convertToSvg=1;rounded=0;startArrow=none;endArrow=block;startSize=6;endSize=6;strokeWidth=1.12;strokeColor=#52718B;fontFamily=Arial;fontSize=11.25;fontColor=#344F67;labelBackgroundColor=#F8FAFC;exitX=0.25;exitY=1;exitPerimeter=0;entryX=0.56;entryY=0;entryPerimeter=0;" edge="1" parent="1" source="projector" target="products">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="486.23" y="274.65" />
+              <mxPoint x="455.12" y="289.22" />
+              <mxPoint x="433.99" y="329.96" />
+            </Array>
+            <mxPoint x="89.28" y="1.87" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relation-6" value="Обновление каталога&lt;br&gt;Iceberg / Nessie API" style="html=1;convertToSvg=1;rounded=0;startArrow=none;endArrow=block;startSize=6;endSize=6;strokeWidth=1.12;strokeColor=#52718B;fontFamily=Arial;fontSize=11.25;fontColor=#344F67;labelBackgroundColor=#F8FAFC;exitX=0.6;exitY=1;exitPerimeter=0;entryX=0.41;entryY=0;entryPerimeter=0;" edge="1" parent="1" source="projector" target="nessie">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="630.7" y="290.54" />
+              <mxPoint x="672.41" y="339.1" />
+            </Array>
+            <mxPoint x="53.09" y="-17.35" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relation-7" value="Чтение разрешённых таблиц · S3" style="html=1;convertToSvg=1;rounded=0;startArrow=block;endArrow=none;startSize=6;endSize=6;strokeWidth=1.12;strokeColor=#52718B;fontFamily=Arial;fontSize=11.25;fontColor=#344F67;labelBackgroundColor=#F8FAFC;exitX=0.5;exitY=1;exitPerimeter=0;entryX=0.5;entryY=0;entryPerimeter=0;" edge="1" parent="1" source="products" target="trino">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="393.25" y="488.29" />
+              <mxPoint x="393.25" y="530.19" />
+            </Array>
+            <mxPoint x="89.52" y="-13.81" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relation-8" value="Версии таблиц · Nessie API" style="html=1;convertToSvg=1;rounded=0;startArrow=block;endArrow=none;startSize=6;endSize=6;strokeWidth=1.12;strokeColor=#52718B;fontFamily=Arial;fontSize=11.25;fontColor=#344F67;labelBackgroundColor=#F8FAFC;exitX=0.32;exitY=1;exitPerimeter=0;entryX=0.76;entryY=0;entryPerimeter=0;" edge="1" parent="1" source="nessie" target="trino">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="633.5" y="471" />
+              <mxPoint x="582" y="502.39" />
+              <mxPoint x="518.91" y="533.46" />
+            </Array>
+            <mxPoint x="116.71" y="-15.24" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relation-9" value="Инвентарь и метаданные&lt;br&gt;коннектор каталога" style="html=1;convertToSvg=1;rounded=0;startArrow=none;endArrow=block;startSize=6;endSize=6;strokeWidth=1.12;strokeColor=#52718B;fontFamily=Arial;fontSize=11.25;fontColor=#344F67;labelBackgroundColor=#F8FAFC;exitX=0.59;exitY=1;exitPerimeter=0;entryX=0.44;entryY=0;entryPerimeter=0;" edge="1" parent="1" source="nessie" target="datahub">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="769.25" y="457.2" />
+              <mxPoint x="784.5" y="476.14" />
+              <mxPoint x="804.14" y="516.88" />
+            </Array>
+            <mxPoint x="69.96" y="-7.56" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relation-10" value="Lineage SQL · ingestion" style="html=1;convertToSvg=1;rounded=0;startArrow=none;endArrow=block;startSize=6;endSize=6;strokeWidth=1.12;strokeColor=#697E94;fontFamily=Arial;fontSize=11.25;fontColor=#344F67;labelBackgroundColor=#F8FAFC;dashed=1;exitX=1;exitY=0.5;exitPerimeter=0;entryX=0;entryY=0.5;entryPerimeter=0;" edge="1" parent="1" source="trino" target="datahub">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="584.6" y="596.62" />
+              <mxPoint x="641.8" y="596.62" />
+            </Array>
+            <mxPoint x="0.11" y="-10.31" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relation-11" value="Создаёт и открывает отчёты · HTTPS" style="html=1;convertToSvg=1;rounded=0;startArrow=block;endArrow=none;startSize=6;endSize=6;strokeWidth=1.12;strokeColor=#6C6A9B;fontFamily=Arial;fontSize=11.25;fontColor=#344F67;labelBackgroundColor=#F8FAFC;exitX=0.61;exitY=1;exitPerimeter=0;entryX=0.41;entryY=0;entryPerimeter=0;" edge="1" parent="1" source="portal" target="analyst">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="473.66" y="814.38" />
+              <mxPoint x="517.19" y="853.4" />
+            </Array>
+            <mxPoint x="117.08" y="12.9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relation-12" value="Утверждённые определения&lt;br&gt;и владельцы KPI · HTTPS" style="html=1;convertToSvg=1;rounded=0;startArrow=block;endArrow=none;startSize=6;endSize=6;strokeWidth=1.12;strokeColor=#6C6A9B;fontFamily=Arial;fontSize=11.25;fontColor=#344F67;labelBackgroundColor=#F8FAFC;exitX=0.56;exitY=1;exitPerimeter=0;entryX=0.48;entryY=0;entryPerimeter=0;" edge="1" parent="1" source="datahub" target="kpi">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="880.26" y="676.95" />
+              <mxPoint x="900.75" y="719.3" />
+              <mxPoint x="923.64" y="829.1" />
+            </Array>
+            <mxPoint x="90.58" y="-2.8" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

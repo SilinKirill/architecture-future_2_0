@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" compressed="false">
+  <diagram id="c4-l3-domain-stream-projector" name="C3 · Проектор доменного потока">
+    <mxGraphModel grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" background="#F8FAFC">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="cluster_projector" value="&lt;B&gt;Проектор доменного потока&lt;/B&gt; · Flink" style="html=1;rounded=1;arcSize=4;container=1;collapsible=0;recursiveResize=0;whiteSpace=wrap;align=left;verticalAlign=top;spacingTop=4;spacingLeft=10;spacingRight=10;fontFamily=Arial;fontSize=15;fontColor=#173B64;fillColor=#FFFFFF;strokeColor=#91ABBE;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="22" y="212.97" width="908.75" height="423.86" as="geometry" />
+        </mxCell>
+        <object id="kafka" label="&lt;B&gt;Шина событий&lt;/B&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Внешний контейнер · Apache Kafka&lt;/font&gt;&lt;br&gt;Темы выставления счетов и проводок&lt;br&gt;Разрешённый регион" link="c4-l2-analytics.svg">
+          <mxCell style="html=1;rounded=1;arcSize=24;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=3;fontFamily=Arial;fontSize=13.75;fontColor=#10253F;fillColor=#EDF6F3;strokeColor=#87AFA3;strokeWidth=1.2;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="1">
+            <mxGeometry x="214.04" y="88.25" width="273.41" height="72.85" as="geometry" />
+          </mxCell>
+        </object>
+        <mxCell id="schema" value="&lt;B&gt;Реестр схем&lt;/B&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Внешний контейнер · Schema Registry&lt;/font&gt;&lt;br&gt;Версии схем и разрешённые поля" style="html=1;rounded=1;arcSize=24;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=3;fontFamily=Arial;fontSize=13.75;fontColor=#10253F;fillColor=#EDF6F3;strokeColor=#87AFA3;strokeWidth=1.2;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="531.7" y="95.12" width="248.1" height="59.1" as="geometry" />
+        </mxCell>
+        <mxCell id="validator" value="&lt;B&gt;Валидатор разрешённой схемы&lt;/B&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Компонент · Flink operator&lt;/font&gt;&lt;br&gt;Проверяет схему, регион, версию и поля" style="html=1;rounded=1;arcSize=24;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=3;fontFamily=Arial;fontSize=13.75;fontColor=#10253F;fillColor=#E7F1FB;strokeColor=#88A8C8;strokeWidth=1.2;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="cluster_projector">
+          <mxGeometry x="336.58" y="52.81" width="289.35" height="59.1" as="geometry" />
+        </mxCell>
+        <mxCell id="projection" value="&lt;B&gt;Идемпотентный проектор&lt;/B&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Компонент · Flink keyed state&lt;/font&gt;&lt;br&gt;Дедупликация по домену, региону и event_id&lt;br&gt;Версия платежа, расчёт суммы за вычетом возвратов" style="html=1;rounded=1;arcSize=24;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=3;fontFamily=Arial;fontSize=13.75;fontColor=#10253F;fillColor=#E7F1FB;strokeColor=#88A8C8;strokeWidth=1.2;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="cluster_projector">
+          <mxGeometry x="140.79" y="182.54" width="378.41" height="72.85" as="geometry" />
+        </mxCell>
+        <mxCell id="writer" value="&lt;B&gt;Запись доменной витрины&lt;/B&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Компонент · Iceberg sink&lt;/font&gt;&lt;br&gt;Фиксирует обновления по контрольной точке&lt;br&gt;При повторе использует ключ и версию записи" style="html=1;rounded=1;arcSize=24;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=3;fontFamily=Arial;fontSize=13.75;fontColor=#10253F;fillColor=#DEF1EB;strokeColor=#6E9E91;strokeWidth=1.2;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="cluster_projector">
+          <mxGeometry x="25.48" y="326.01" width="331.54" height="72.85" as="geometry" />
+        </mxCell>
+        <mxCell id="checkpoint" value="&lt;B&gt;Контрольные точки&lt;/B&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Компонент · Flink Checkpoint Coordinator&lt;/font&gt;&lt;br&gt;Сохраняет позиции Kafka и состояние операторов&lt;br&gt;Восстанавливает обработку с подтверждённой позиции" style="html=1;rounded=1;arcSize=24;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=3;fontFamily=Arial;fontSize=13.75;fontColor=#10253F;fillColor=#E7F1FB;strokeColor=#88A8C8;strokeWidth=1.2;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="cluster_projector">
+          <mxGeometry x="496.58" y="326.01" width="386.85" height="72.85" as="geometry" />
+        </mxCell>
+        <mxCell id="quarantine" value="&lt;B&gt;Карантин сообщения&lt;/B&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Компонент · Flink side output&lt;/font&gt;&lt;br&gt;Отбирает код ошибки, схему и безопасный ID" style="html=1;rounded=1;arcSize=24;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=3;fontFamily=Arial;fontSize=13.75;fontColor=#713C16;fillColor=#FCEEDC;strokeColor=#B78760;strokeWidth=1.2;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="cluster_projector">
+          <mxGeometry x="563.14" y="189.41" width="321.23" height="59.1" as="geometry" />
+        </mxCell>
+        <mxCell id="snapshots" value="&lt;B&gt;Хранилище контрольных точек&lt;/B&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Внешнее хранилище · S3&lt;/font&gt;&lt;br&gt;Ограниченный доступ сервисной роли Flink" style="html=1;rounded=1;arcSize=24;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=3;fontFamily=Arial;fontSize=13.75;fontColor=#10253F;fillColor=#EDF6F3;strokeColor=#87AFA3;strokeWidth=1.2;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="543.89" y="701.84" width="306.22" height="59.1" as="geometry" />
+        </mxCell>
+        <mxCell id="iceberg" value="&lt;B&gt;Продукт «Оплаты счетов»&lt;/B&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Внешнее хранилище · Iceberg / S3&lt;/font&gt;&lt;br&gt;День, регион, организация, валюта" style="html=1;rounded=1;arcSize=24;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=3;fontFamily=Arial;fontSize=13.75;fontColor=#10253F;fillColor=#DEF1EB;strokeColor=#6E9E91;strokeWidth=1.2;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="86.39" y="701.84" width="253.73" height="59.1" as="geometry" />
+        </mxCell>
+        <mxCell id="dlq" value="&lt;B&gt;Очередь диагностики · DLQ&lt;/B&gt;&lt;br&gt;&lt;font style=&quot;font-size:10px&quot;&gt;Внешний контейнер · Kafka с отдельным ACL&lt;/font&gt;&lt;br&gt;Код ошибки и технические метаданные" style="html=1;rounded=1;arcSize=24;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=3;fontFamily=Arial;fontSize=13.75;fontColor=#713C16;fillColor=#FCEEDC;strokeColor=#B78760;strokeWidth=1.2;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="893.57" y="701.84" width="281.85" height="59.1" as="geometry" />
+        </mxCell>
+        <mxCell id="incident" value="Владелец разбирает исходное сообщение&lt;br&gt;в разрешённом контуре и после исправления&lt;br&gt;публикует факт по контракту." style="html=1;shape=note;size=14;whiteSpace=wrap;align=center;verticalAlign=middle;spacing=3;fontFamily=Arial;fontSize=13.75;fontColor=#713C16;fillColor=#FFF7ED;strokeColor=#C89264;strokeWidth=1.2;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="874.35" y="819.69" width="320.29" height="72.22" as="geometry" />
+        </mxCell>
+        <mxCell id="diagram-title" value="&lt;B&gt;C4 · Компоненты · Проектор доменного потока&lt;/B&gt;&lt;br&gt;&lt;font style=&quot;font-size:17.5px&quot;&gt;Пример потока «Оплаты счетов» на Apache Flink&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Arial;fontSize=28.75;fontColor=#10253F;strokeColor=none;fillColor=none;convertToSvg=1;svgWhiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="12" y="12" width="1182.65" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="relation-0" value="Валидный счёт, платёж или возврат" style="html=1;convertToSvg=1;rounded=0;startArrow=none;endArrow=block;startSize=6;endSize=6;strokeWidth=1.12;strokeColor=#52718B;fontFamily=Arial;fontSize=11.25;fontColor=#344F67;labelBackgroundColor=#F8FAFC;exitX=0.39;exitY=1;exitPerimeter=0;entryX=0.61;entryY=0;entryPerimeter=0;" edge="1" parent="1" source="validator" target="projection">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="450.04" y="343.76" />
+              <mxPoint x="422.74" y="367.97" />
+            </Array>
+            <mxPoint x="98.78" y="0.13" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relation-1" value="Изменения по ключу и версии" style="html=1;convertToSvg=1;rounded=0;startArrow=none;endArrow=block;startSize=6;endSize=6;strokeWidth=1.12;strokeColor=#52718B;fontFamily=Arial;fontSize=11.25;fontColor=#344F67;labelBackgroundColor=#F8FAFC;exitX=0.41;exitY=1;exitPerimeter=0;entryX=0.61;entryY=0;entryPerimeter=0;" edge="1" parent="1" source="projection" target="writer">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="298.09" y="487.96" />
+              <mxPoint x="274.64" y="511.79" />
+            </Array>
+            <mxPoint x="83.38" y="-0" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relation-2" value="Ошибка схемы, региона или полей" style="html=1;convertToSvg=1;rounded=0;startArrow=none;endArrow=block;startSize=6;endSize=6;strokeWidth=1.12;strokeColor=#A2683C;fontFamily=Arial;fontSize=11.25;fontColor=#713C16;labelBackgroundColor=#F8FAFC;exitX=0.73;exitY=1;exitPerimeter=0;entryX=0.37;entryY=0;entryPerimeter=0;" edge="1" parent="1" source="validator" target="quarantine">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="602.45" y="339.71" />
+              <mxPoint x="634.5" y="353.64" />
+              <mxPoint x="666.48" y="375.77" />
+            </Array>
+            <mxPoint x="105.14" y="2.51" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relation-3" value="Снимок состояния / восстановление" style="html=1;convertToSvg=1;rounded=0;startArrow=none;endArrow=block;startSize=6;endSize=6;strokeWidth=1.12;strokeColor=#697E94;fontFamily=Arial;fontSize=11.25;fontColor=#344F67;labelBackgroundColor=#F8FAFC;dashed=1;exitX=0.26;exitY=0;exitPerimeter=0;entryX=0.74;entryY=1;entryPerimeter=0;" edge="1" parent="1" source="checkpoint" target="projection">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="569.41" y="518.32" />
+              <mxPoint x="505.15" y="493.16" />
+            </Array>
+            <mxPoint x="106.38" y="-0.02" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relation-4" value="ID завершённой&lt;br&gt;контрольной точки" style="html=1;convertToSvg=1;rounded=0;startArrow=block;endArrow=none;startSize=6;endSize=6;strokeWidth=1.12;strokeColor=#697E94;fontFamily=Arial;fontSize=11.25;fontColor=#344F67;labelBackgroundColor=#F8FAFC;dashed=1;exitX=1;exitY=0.5;exitPerimeter=0;entryX=0;entryY=0.5;entryPerimeter=0;" edge="1" parent="1" source="writer" target="checkpoint">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="431.16" y="575.41" />
+              <mxPoint x="475.68" y="575.41" />
+            </Array>
+            <mxPoint x="-0.02" y="-16.88" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relation-6" value="Чтение доменных событий · Kafka consumer" style="html=1;convertToSvg=1;rounded=0;startArrow=none;endArrow=block;startSize=6;endSize=6;strokeWidth=1.12;strokeColor=#52718B;fontFamily=Arial;fontSize=11.25;fontColor=#344F67;labelBackgroundColor=#F8FAFC;exitX=0.53;exitY=1;exitPerimeter=0;entryX=0.35;entryY=0;entryPerimeter=0;" edge="1" parent="1" source="kafka" target="validator">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="362.32" y="181.86" />
+              <mxPoint x="366.69" y="202.97" />
+              <mxPoint x="413.19" y="234" />
+            </Array>
+            <mxPoint x="88.5" y="-26.02" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relation-7" value="Запрос версии схемы · REST" style="html=1;convertToSvg=1;rounded=0;startArrow=block;endArrow=none;startSize=6;endSize=6;strokeWidth=1.12;strokeColor=#697E94;fontFamily=Arial;fontSize=11.25;fontColor=#344F67;labelBackgroundColor=#F8FAFC;dashed=1;exitX=0.43;exitY=1;exitPerimeter=0;entryX=0.61;entryY=0;entryPerimeter=0;" edge="1" parent="1" source="schema" target="validator">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="619.81" y="182.72" />
+              <mxPoint x="607" y="202.97" />
+              <mxPoint x="566.48" y="238.56" />
+            </Array>
+            <mxPoint x="99.01" y="-18.82" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relation-8" value="Позиции и состояние&lt;br&gt;запись/чтение · S3 API" style="html=1;convertToSvg=1;rounded=0;startArrow=none;endArrow=block;startSize=6;endSize=6;strokeWidth=1.12;strokeColor=#697E94;fontFamily=Arial;fontSize=11.25;fontColor=#344F67;labelBackgroundColor=#F8FAFC;dashed=1;exitX=0.49;exitY=1;exitPerimeter=0;entryX=0.51;entryY=0;entryPerimeter=0;" edge="1" parent="1" source="checkpoint" target="snapshots">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="706.2" y="635.96" />
+              <mxPoint x="703.16" y="667.11" />
+            </Array>
+            <mxPoint x="60.31" y="3.13" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relation-9" value="Атомарный commit снапшота&lt;br&gt;Iceberg / Nessie / S3" style="html=1;convertToSvg=1;rounded=0;startArrow=none;endArrow=block;startSize=6;endSize=6;strokeWidth=1.12;strokeColor=#52718B;fontFamily=Arial;fontSize=11.25;fontColor=#344F67;labelBackgroundColor=#F8FAFC;exitX=0.5;exitY=1;exitPerimeter=0;entryX=0.5;entryY=0;entryPerimeter=0;" edge="1" parent="1" source="writer" target="iceberg">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="213.25" y="635.96" />
+              <mxPoint x="213.25" y="667.11" />
+            </Array>
+            <mxPoint x="76.88" y="3.13" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="relation-10" value="Диагностика без тела события · Kafka" style="html=1;convertToSvg=1;rounded=0;startArrow=none;endArrow=block;startSize=6;endSize=6;strokeWidth=1.12;strokeColor=#A2683C;fontFamily=Arial;fontSize=11.25;fontColor=#713C16;labelBackgroundColor=#F8FAFC;exitX=0.65;exitY=1;exitPerimeter=0;entryX=0.44;entryY=0;entryPerimeter=0;" edge="1" parent="1" source="quarantine" target="dlq">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="848.94" y="493.42" />
+              <mxPoint x="927" y="538.99" />
+              <mxPoint x="982.05" y="636.88" />
+            </Array>
+            <mxPoint x="144.92" y="21.84" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -7,17 +7,19 @@
 - [Целевая архитектура и переход](architecture.md) — от выставления счёта до отчёта, межрегиональные границы, надёжность и условия вывода легаси.
 - [Карта рисков](risks.md) и [план управления](risk-management.md) — оценки, владельцы, предотвращение и восстановление.
 
+Схемы можно просматривать в README. Для редактирования скачайте соответствующий файл `.drawio` и откройте его в draw.io.
+
 ## C4. Контейнеры
 
 Два представления уровня C2 показывают одно целевое состояние. Первое описывает источники событий и границы операционных систем, второе — использование разрешённых данных сотрудниками.
 
 ![Операционные системы и передача событий](diagrams/c4-l2-operational.svg)
 
-[Открыть крупно](diagrams/c4-l2-operational.svg) · [Редактируемый исходник DOT](diagrams/c4-l2-operational.dot)
+[Открыть крупно](diagrams/c4-l2-operational.svg) · [Исходник draw.io](diagrams/c4-l2-operational.drawio)
 
 ![Аналитическая платформа и портал](diagrams/c4-l2-analytics.svg)
 
-[Открыть крупно](diagrams/c4-l2-analytics.svg) · [Редактируемый исходник DOT](diagrams/c4-l2-analytics.dot)
+[Открыть крупно](diagrams/c4-l2-analytics.svg) · [Исходник draw.io](diagrams/c4-l2-analytics.drawio)
 
 ## C4. Компоненты
 
@@ -25,7 +27,7 @@
 
 ![Компоненты доменного потокового обработчика](diagrams/c4-l3-domain-stream-projector.svg)
 
-[Открыть крупно](diagrams/c4-l3-domain-stream-projector.svg) · [Редактируемый исходник DOT](diagrams/c4-l3-domain-stream-projector.dot)
+[Открыть крупно](diagrams/c4-l3-domain-stream-projector.svg) · [Исходник draw.io](diagrams/c4-l3-domain-stream-projector.drawio)
 
 ## Как проверить
 
