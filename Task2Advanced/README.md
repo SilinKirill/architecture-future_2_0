@@ -34,7 +34,7 @@ $env:AWS_SECRET_ACCESS_KEY = [System.Net.NetworkCredential]::new('', (Read-Host 
 
    ```powershell
    docker compose run --rm terraform init -input=false -lockfile=readonly -reconfigure "-backend-config=bucket=$bucket" "-backend-config=key=task2advanced/dev/terraform.tfstate"
-   docker compose run --rm terraform plan -input=false -lock-timeout=2m -var-file=../../Task1Advanced/envs/dev/terraform.tfvars -var=name=task2-dev "-var=zone=$zone" -out=dev.tfplan
+   docker compose run --rm terraform plan -input=false -lock-timeout=2m '-var-file=../../Task1Advanced/envs/dev/terraform.tfvars' -var=name=task2-dev "-var=zone=$zone" '-out=dev.tfplan'
    docker compose run --rm terraform show dev.tfplan
    ```
 
@@ -49,13 +49,13 @@ $env:AWS_SECRET_ACCESS_KEY = [System.Net.NetworkCredential]::new('', (Read-Host 
 
    ```powershell
    docker compose run --rm terraform state list
-   docker compose run --rm terraform plan -input=false -lock-timeout=2m -var-file=../../Task1Advanced/envs/dev/terraform.tfvars -var=name=task2-dev "-var=zone=$zone"
+   docker compose run --rm terraform plan -input=false -lock-timeout=2m '-var-file=../../Task1Advanced/envs/dev/terraform.tfvars' -var=name=task2-dev "-var=zone=$zone"
    ```
 
 4. Постройте и отдельно подтвердите план удаления. Проверьте пустой `state list` и отсутствие ВМ и её дисков в Compute Cloud.
 
    ```powershell
-   docker compose run --rm terraform plan -destroy -input=false -lock-timeout=2m -var-file=../../Task1Advanced/envs/dev/terraform.tfvars -var=name=task2-dev "-var=zone=$zone" -out=dev-destroy.tfplan
+   docker compose run --rm terraform plan -destroy -input=false -lock-timeout=2m '-var-file=../../Task1Advanced/envs/dev/terraform.tfvars' -var=name=task2-dev "-var=zone=$zone" '-out=dev-destroy.tfplan'
    docker compose run --rm terraform show dev-destroy.tfplan
    # После проверки плана
    docker compose run --rm terraform apply -input=false -lock-timeout=2m dev-destroy.tfplan

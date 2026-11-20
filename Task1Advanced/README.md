@@ -53,20 +53,20 @@ Compose использует Terraform `1.11.4` и скачивает прова
 
    ```sh
    docker compose run --rm terraform -chdir=envs/dev init -input=false
-   docker compose run --rm terraform -chdir=envs/dev plan -input=false -var-file=cloud.local.tfvars
+   docker compose run --rm terraform -chdir=envs/dev plan -input=false '-var-file=cloud.local.tfvars'
    ```
 
 5. Проверьте и подтвердите план, который выведет `apply`. Выведите параметры ВМ и проверьте в консоли Compute Cloud, что к ней подключены системный диск и диск данных.
 
    ```sh
-   docker compose run --rm terraform -chdir=envs/dev apply -var-file=cloud.local.tfvars
+   docker compose run --rm terraform -chdir=envs/dev apply '-var-file=cloud.local.tfvars'
    docker compose run --rm terraform -chdir=envs/dev output -json vm
    ```
 
 6. По завершении удалите созданную ВМ и её диски. Проверьте план удаления перед подтверждением. После успешного `destroy` команда `state list` не выводит адресов ресурсов.
 
    ```sh
-   docker compose run --rm terraform -chdir=envs/dev destroy -var-file=cloud.local.tfvars
+   docker compose run --rm terraform -chdir=envs/dev destroy '-var-file=cloud.local.tfvars'
    docker compose run --rm terraform -chdir=envs/dev state list
    ```
 
@@ -74,5 +74,5 @@ Compose использует Terraform `1.11.4` и скачивает прова
 
 ```sh
 docker compose run --rm terraform -chdir=envs/stage init -input=false
-docker compose run --rm terraform -chdir=envs/stage plan -input=false -var-file=cloud.local.tfvars
+docker compose run --rm terraform -chdir=envs/stage plan -input=false '-var-file=cloud.local.tfvars'
 ```
