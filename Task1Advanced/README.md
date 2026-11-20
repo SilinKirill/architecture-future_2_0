@@ -16,11 +16,13 @@
 
 ## Локальные проверки и CI
 
-Из каталога `Task1Advanced` выполните одну команду в PowerShell, Bash или CI с Docker и Docker Compose v2.
+Из каталога `Task1Advanced` выполните одну команду в PowerShell, Bash или CI. На Windows, Linux и macOS нужны Docker с Linux-контейнерами и Docker Compose v2.
 
 ```sh
 docker compose run --rm -T check
 ```
+
+Эту проверку можно запустить сразу после клонирования. Файл `cloud.local.tfvars` понадобится только при реальном развёртывании из следующего раздела.
 
 Compose использует Terraform `1.11.4` и скачивает провайдер Yandex `0.140.0` через официальный сетевой mirror. При первом запуске потребуется доступ к Docker Hub и `terraform-mirror.yandexcloud.net`. После `fmt -check` выполняются `init -backend=false` и `validate` для модуля и всех трёх окружений. [Настройка зеркала Terraform](https://yandex.cloud/ru/docs/tutorials/infrastructure-management/terraform-modules)
 
@@ -28,8 +30,12 @@ Compose использует Terraform `1.11.4` и скачивает прова
 
 ## Ручная проверка `dev` в Yandex Cloud
 
+Для этого сценария используйте свой каталог Yandex Cloud. Запускайте команды из папки `Task1Advanced` в одной вкладке терминала.
+
 1. Выберите каталог с действующим биллингом и существующую подсеть VPC в этом каталоге. Назначьте учётной записи роль `compute.editor` на каталог. При `nat = true` дополнительно нужна роль `vpc.publicAdmin`. Для `dev` проверьте доступность платформы и свободную квоту в зоне подсети на 2 vCPU, 2 ГиБ RAM, 20 ГиБ сетевого HDD и 10 ГиБ сетевого SSD. [Роли Compute Cloud](https://yandex.cloud/ru/docs/compute/security/), [квоты Compute Cloud](https://yandex.cloud/ru/docs/compute/concepts/limits#quotas)
-2. Установите Yandex Cloud CLI и выполните `yc init` на хосте. В профиле выберите нужные облако и каталог. Передайте авторизацию контейнеру через переменные окружения. Пример для PowerShell с авторизованным профилем. [Установка и настройка CLI](https://yandex.cloud/ru/docs/cli/quickstart), [авторизация провайдера](https://yandex.cloud/ru/docs/terraform/authentication)
+2. Установите Yandex Cloud CLI по инструкции для своей ОС, затем в терминале выполните `yc --version`. При ручной установке добавьте папку с CLI в `PATH` этого терминала. В PowerShell для скачанного `yc.exe` также можно задать алиас `Set-Alias yc 'C:\путь\к\yc.exe'`, подставив фактический путь. Выполните `yc init` и выберите нужные облако и каталог. Задайте переменные авторизации в том же терминале, из которого будете запускать Compose. [Установка CLI для Windows, Linux и macOS](https://yandex.cloud/ru/docs/cli/operations/install-cli), [настройка CLI](https://yandex.cloud/ru/docs/cli/quickstart), [авторизация провайдера](https://yandex.cloud/ru/docs/terraform/authentication)
+
+   В PowerShell:
 
    ```powershell
    $env:YC_TOKEN = $(yc iam create-token)
@@ -37,17 +43,28 @@ Compose использует Terraform `1.11.4` и скачивает прова
    $env:YC_FOLDER_ID = $(yc config get folder-id)
    ```
 
-   Для Bash используйте `export YC_TOKEN=$(yc iam create-token)` и аналогично задайте `YC_CLOUD_ID` и `YC_FOLDER_ID` через `yc config get`.
+   В Bash:
 
-3. Создайте локальный файл `envs/dev/cloud.local.tfvars`. Подставьте ID подсети, её зону и строку из своего публичного ключа `.pub`. Если SSH-пары ещё нет, выполните `ssh-keygen -t ed25519` и скопируйте содержимое созданного файла `.pub`. Для SSH по публичному адресу дополнительно передайте `nat = true` и группу безопасности, разрешающую TCP/22 с вашего адреса, в `security_group_ids`. [Создание пары SSH-ключей](https://yandex.cloud/ru/docs/compute/operations/vm-connect/ssh)
+   ```bash
+   YC_TOKEN="$(yc iam create-token)" &&
+   YC_CLOUD_ID="$(yc config get cloud-id)" &&
+   YC_FOLDER_ID="$(yc config get folder-id)" &&
+   export YC_TOKEN YC_CLOUD_ID YC_FOLDER_ID
+   ```
 
-   В выбранном профиле команда `yc vpc subnet list` покажет ID и зону существующих подсетей.
+3. Заполните параметры своего облака для `dev`.
+
+   - Выполните `yc vpc subnet list`. Выберите одну строку таблицы и возьмите из неё `ID` для `subnet_id` и `ZONE` для `zone`.
+   - Откройте файл публичного SSH-ключа `.pub` и скопируйте всю его строку в `ssh_public_key`. Если ключа ещё нет, выполните `ssh-keygen -t ed25519`. При сохранении по умолчанию публичный ключ будет в `$env:USERPROFILE\.ssh\id_ed25519.pub` в PowerShell или в `~/.ssh/id_ed25519.pub` в Bash. [Создание пары SSH-ключей](https://yandex.cloud/ru/docs/compute/operations/vm-connect/ssh)
+   - Откройте папку `Task1Advanced/envs/dev` в редакторе и создайте рядом с `terraform.tfvars` файл с точным именем `cloud.local.tfvars`. Вставьте блок ниже, заменив значения в угловых скобках. Файл остаётся в вашей рабочей копии и игнорируется Git.
 
    ```hcl
    subnet_id      = "<ID существующей подсети>"
    zone           = "<зона подсети>"
    ssh_public_key = "<строка из публичного ключа OpenSSH>"
    ```
+
+   Для SSH по публичному адресу дополнительно передайте `nat = true` и группу безопасности, разрешающую TCP/22 с вашего адреса, в `security_group_ids`.
 
 4. Из `Task1Advanced` инициализируйте окружение и проверьте план. При пустом state ожидается `Plan: 2 to add, 0 to change, 0 to destroy.` Отдельными ресурсами будут ВМ и диск данных.
 
